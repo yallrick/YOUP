@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -30,6 +31,8 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import java.util.ArrayList;
 import java.util.List;
+
+import youp.ingesup.com.youp.view.HomeActivity;
 
 
 /**
@@ -246,6 +249,11 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
     protected void updateConnectButtonState() {
         //TODO: Update this logic to also handle the user logged in by email.
         boolean connected = getPlusClient().isConnected();
+
+        if(connected){
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
 
         mSignOutButtons.setVisibility(connected ? View.VISIBLE : View.GONE);
         mPlusSignInButton.setVisibility(connected ? View.GONE : View.VISIBLE);

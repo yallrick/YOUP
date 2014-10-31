@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import youp.ingesup.com.youp.R;
 
@@ -54,6 +55,27 @@ public class HomeActivity extends Activity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+
+
+        Button btn = (Button)findViewById(R.id.test_login);
+
+        if(btn == null)
+            return;
+
+        if(position == 1){
+            btn.setVisibility(View.VISIBLE);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }else{
+            btn.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     public void onSectionAttached(int number) {
@@ -129,8 +151,7 @@ public class HomeActivity extends Activity
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             return rootView;
         }

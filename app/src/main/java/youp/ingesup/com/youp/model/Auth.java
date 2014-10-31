@@ -6,7 +6,7 @@ package youp.ingesup.com.youp.model;
 public class Auth {
 
     public Auth instance;
-    public User
+    private User user;
 
     private Auth()
     {

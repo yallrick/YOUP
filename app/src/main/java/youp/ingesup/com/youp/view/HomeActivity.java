@@ -15,11 +15,14 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
+import youp.ingesup.com.youp.model.bean.Categorie;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.model.services.UserService;
 
@@ -134,7 +137,13 @@ public class HomeActivity extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+            // TODO : savoir quel item a été sélectionné et inflate le bon layout en fonction
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+            // TODO : faire une méthode par possibilité dans lesquelles il y aura tout ce qui est récupération des vues, les event, etc...
+
 
 
             Button btn = (Button)rootView.findViewById(R.id.test_login);
@@ -149,12 +158,11 @@ public class HomeActivity extends Activity
                     UserService service = restAdapter.create(UserService.class);
                     EventService eventService = restAdapter.create(EventService.class);
 
-                    final String[] categorieJSON = new String[1];
 
-                    eventService.getCategories(new Callback<String[]>() {
+                    eventService.getCategories(new Callback<List<Categorie>>() {
 
                         @Override
-                        public void success(String[] strings, Response response) {
+                        public void success(List<Categorie> strings, Response response) {
                             Log.e("HomeActivity", "response : " + response.toString());
                         }
 

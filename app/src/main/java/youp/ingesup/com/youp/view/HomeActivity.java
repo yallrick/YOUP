@@ -18,7 +18,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import retrofit.RestAdapter;
 import youp.ingesup.com.youp.R;
+import youp.ingesup.com.youp.model.UserService;
 
 public class HomeActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -67,6 +70,12 @@ public class HomeActivity extends Activity
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://???").build();
+
+                    UserService service = restAdapter.create(UserService.class);
+
+
+
 
                 }
             });

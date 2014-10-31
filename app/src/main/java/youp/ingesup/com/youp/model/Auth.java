@@ -1,5 +1,7 @@
 package youp.ingesup.com.youp.model;
 
+import youp.ingesup.com.youp.model.bean.User;
+
 /**
  * Created by Damiano on 31/10/2014.
  */

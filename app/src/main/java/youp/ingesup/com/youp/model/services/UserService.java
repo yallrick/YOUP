@@ -1,4 +1,4 @@
-package youp.ingesup.com.youp.model;
+package youp.ingesup.com.youp.model.services;
 
 import retrofit.http.GET;
 import retrofit.http.POST;

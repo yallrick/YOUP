@@ -1,4 +1,4 @@
-package youp.ingesup.com.youp.model;
+package youp.ingesup.com.youp.model.bean;
 
 /**
  * Created by Damiano on 31/10/2014.

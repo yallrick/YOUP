@@ -3,18 +3,21 @@ package youp.ingesup.com.youp.view;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import youp.ingesup.com.youp.LoginFragment;
 import youp.ingesup.com.youp.R;
+import youp.ingesup.com.youp.SignUpFragment;
 import youp.ingesup.com.youp.adapter.TabsLoginSignUpAdapter;
 
 
 public class LoginActivity extends FragmentActivity implements
-        ActionBar.TabListener {
+        ActionBar.TabListener, LoginFragment.OnFragmentInteractionListener, SignUpFragment.OnFragmentInteractionListener{
 
     private ViewPager viewPager;
     private TabsLoginSignUpAdapter mAdapter;
@@ -26,7 +29,7 @@ public class LoginActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_login);
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -78,6 +81,11 @@ public class LoginActivity extends FragmentActivity implements
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

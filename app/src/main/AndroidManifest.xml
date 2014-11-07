@@ -14,16 +14,17 @@
         <activity
             android:name=".view.HomeActivity"
             android:label="@string/title_activity_home" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
-        <activity android:name="view.LoginActivity"
-            android:label="@string/title_activity_login"
-            >
+        <activity android:name=".view.LoginActivity"
+            android:label="@string/title_activity_login">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
     </application>
     <!-- To access Google+ APIs: -->

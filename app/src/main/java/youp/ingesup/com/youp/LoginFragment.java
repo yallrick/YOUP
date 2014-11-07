@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import javax.xml.datatype.Duration;
 
-public class LoginFragment extends Fragment {
-
+public class LoginFragment extends Fragment{
     private OnFragmentInteractionListener mListener;
 
     private Button btLogin;

@@ -16,7 +16,7 @@ import android.widget.Button;
 
 import retrofit.RestAdapter;
 import youp.ingesup.com.youp.R;
-import youp.ingesup.com.youp.model.UserService;
+import youp.ingesup.com.youp.model.services.UserService;
 
 public class HomeActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {

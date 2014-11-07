@@ -6,7 +6,6 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,16 +14,9 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
 
-import java.util.List;
-
-import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
-import youp.ingesup.com.youp.model.bean.Categorie;
-import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.model.UserService;
 
 public class HomeActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -61,6 +53,33 @@ public class HomeActivity extends Activity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+
+
+        Button btn = (Button)findViewById(R.id.test_login);
+
+        if(btn == null)
+            return;
+
+        if(position == 1){
+            btn.setVisibility(View.VISIBLE);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://???").build();
+
+                    UserService service = restAdapter.create(UserService.class);
+
+
+
+
+                }
+            });
+        }else{
+            btn.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     public void onSectionAttached(int number) {
@@ -137,45 +156,7 @@ public class HomeActivity extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-            // TODO : savoir quel item a été sélectionné et inflate le bon layout en fonction
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-            // TODO : faire une méthode par possibilité dans lesquelles il y aura tout ce qui est récupération des vues, les event, etc...
-
-
-
-            Button btn = (Button)rootView.findViewById(R.id.test_login);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Log.e("HomeActivity", "lancement de la requête...");
-
-                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net").build();
-
-                    UserService service = restAdapter.create(UserService.class);
-                    EventService eventService = restAdapter.create(EventService.class);
-
-
-                    eventService.getCategories(new Callback<List<Categorie>>() {
-
-                        @Override
-                        public void success(List<Categorie> strings, Response response) {
-                            Log.e("HomeActivity", "response : " + response.toString());
-                        }
-
-                        @Override
-                        public void failure(RetrofitError error) {
-                            Log.e("HomeActivity", "retour : " + error.toString());
-                        }
-                    });
-
-
-                }
-            });
-
             return rootView;
         }
 

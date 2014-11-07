@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="youp.ingesup.com.youp.fragment_login">
+    tools:context="youp.ingesup.com.youp.LoginFragment">
 
 
     <LinearLayout

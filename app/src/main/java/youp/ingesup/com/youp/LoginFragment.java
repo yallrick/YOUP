@@ -3,7 +3,7 @@ package youp.ingesup.com.youp;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import javax.xml.datatype.Duration;
 
-public class fragment_login extends Fragment {
+public class LoginFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
@@ -23,7 +23,7 @@ public class fragment_login extends Fragment {
     private EditText etUsername;
     private EditText etPassword;
 
-    public fragment_login() {
+    public LoginFragment() {
 
     }
 

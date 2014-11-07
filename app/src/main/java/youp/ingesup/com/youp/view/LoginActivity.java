@@ -72,6 +72,7 @@ public class LoginActivity extends FragmentActivity implements
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+        viewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override

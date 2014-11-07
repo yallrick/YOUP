@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment{
 
     private void LostPassword()
     {
-        if(etUsername.getText().toString() == "")
+        if(etUsername.getText().toString().equals(""))
         {
             Toast.makeText(getActivity(),"Attention : le champs Username est obligatoire!",Toast.LENGTH_LONG ).show();
             return;
@@ -113,13 +113,13 @@ public class LoginFragment extends Fragment{
         boolean res = true;
         String msg = "Problème(s) de saisie:";
 
-        if(etPassword.getText().toString() == "")
+        if(etPassword.getText().toString().equals(""))
         {
             res = false;
             msg += "\n - Le champs Password est obligatoire";
         }
 
-        if(etUsername.getText().toString() == "")
+        if(etUsername.getText().toString().toString().equals(""))
         {
             res = false;
             msg += "\n - Le champs Username est obligatoire";

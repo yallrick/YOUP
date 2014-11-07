@@ -93,6 +93,17 @@ public interface EventService {
                      @Path("isPublic") boolean isPublic);
 
 
+    @GET("api/EvenementEtat")
+    void getEventStates();
+
+    @GET("api/EvenementEtat/{id}")
+    void getState(@Path("id") String id);
+
+    @GET("api/Lieu")
+    void getLocations();
+
+    @GET("api/Lieu/{id}")
+    void getLocation(@Path("id") String id);
 
 
 }

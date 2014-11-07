@@ -1,18 +1,15 @@
 package youp.ingesup.com.youp.view;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import youp.ingesup.com.youp.LoginFragment;
-import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.SignUpFragment;
+import youp.ingesup.com.youp.view.fragment.LoginFragment;
+import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.adapter.TabsLoginSignUpAdapter;
 
 

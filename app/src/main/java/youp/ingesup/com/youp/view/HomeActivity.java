@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import retrofit.RestAdapter;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.view.fragment.EventFragment;
 
-public class HomeActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -31,14 +33,20 @@ public class HomeActivity extends Activity
      */
     private CharSequence mTitle;
 
+    private FrameLayout container;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("HomeActivity", "onCreate() setContent");
         setContentView(R.layout.activity_home);
+
+        Log.e("HomeActivity", "onCreate()");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+        container = (FrameLayout)findViewById(R.id.container);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -49,40 +57,23 @@ public class HomeActivity extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+
+        if(container != null) {
+            container.removeAllViews();
+            Log.e("onNavigationDrawerItemSelected", "container is clean");
+
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
-
-
-        Button btn = (Button)findViewById(R.id.test_login);
-
-        if(btn == null)
-            return;
-
-        if(position == 1){
-            btn.setVisibility(View.VISIBLE);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://???").build();
-
-                    UserService service = restAdapter.create(UserService.class);
-
-
-
-
-                }
-            });
-        }else{
-            btn.setVisibility(View.GONE);
         }
+        else Log.e("onNavigationDrawerItemSelected", "container is null !!");
 
-
-
+        Log.e("HomeActivity", "onNavigationDrawerItemSelected() -> " + position);
     }
 
     public void onSectionAttached(int number) {
+        Log.e("HomeActivity", "onSectionAttached() -> " + number);
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
@@ -143,11 +134,25 @@ public class HomeActivity extends Activity
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static Fragment newInstance(int sectionNumber) {
+
+            Log.e("PlaceholderFragment", "newInstance() -> " + sectionNumber);
+
+            Fragment fragment = null;
+
+            if(sectionNumber == 1) {
+                fragment = new EventFragment();
+            }
+
+            if(sectionNumber == 2){
+                fragment = new PlaceholderFragment();
+            }
+
+
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
+
             return fragment;
         }
 
@@ -156,9 +161,19 @@ public class HomeActivity extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            int itemSelected = getArguments().getInt(ARG_SECTION_NUMBER);
+
+
+
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+            Log.e("PlaceholderFragment", "onCreateView() -> " + itemSelected);
+
             return rootView;
         }
+
 
         @Override
         public void onAttach(Activity activity) {

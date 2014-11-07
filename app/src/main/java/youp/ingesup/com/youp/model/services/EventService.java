@@ -50,12 +50,15 @@ public interface EventService {
      */
     @GET("api/Evenement?date_search={date_search}&max_result={max_result}&categorie={categorie}&text_search={text_search}&max_id={max_id}&orderby={orderby}")
     void getEvents(@Path("date_search") String dateSearch,
-                         @Path("max_result") String maxResult,
-                         @Path("categorie") String categorie,
-                         @Path("text_search") String textSearch,
-                         @Path("max_id") String maxId,
-                         @Path("orderby") String orderBy,
-                         Callback<List<Evenement>> callback);
+                   @Path("max_result") String maxResult,
+                   @Path("categorie") String categorie,
+                   @Path("text_search") String textSearch,
+                   @Path("max_id") String maxId,
+                   @Path("orderby") String orderBy,
+                   Callback<List<Evenement>> callback);
+
+    @GET("api/Evenement")
+    void getEvents(Callback<List<Evenement>> callback);
 
 
     @GET("api/Evenement?id_profil={id_profil}")

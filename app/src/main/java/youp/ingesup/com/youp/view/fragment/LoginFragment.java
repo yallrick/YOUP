@@ -21,6 +21,7 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.tool.FieldValidator;
 
 public class LoginFragment extends Fragment{
     private OnFragmentInteractionListener mListener;
@@ -97,7 +98,7 @@ public class LoginFragment extends Fragment{
 
     private void Login()
     {
-        if(ControleSaisie())
+        if(checkValidation())
         {
             /* TODO: Envoi des informations à l'API et étude du retour */
 
@@ -134,29 +135,13 @@ public class LoginFragment extends Fragment{
 
     }
 
-    private boolean ControleSaisie()
-    {
-        boolean res = true;
-        String msg = "Problème(s) de saisie:";
+    private boolean checkValidation() {
+        boolean ret = true;
 
-        if(etPassword.getText().toString().equals(""))
-        {
-            res = false;
-            msg += "\n - Le champs Password est obligatoire";
-        }
+        if (!FieldValidator.hasText(etUsername)) ret = false;
+        if (!FieldValidator.hasText(etPassword)) ret = false;
 
-        if(etUsername.getText().toString().toString().equals(""))
-        {
-            res = false;
-            msg += "\n - Le champs Username est obligatoire";
-        }
-
-        if(!res)
-        {
-            Toast.makeText(getActivity(),msg,Toast.LENGTH_LONG ).show();
-        }
-
-        return res;
+        return ret;
     }
 
 }

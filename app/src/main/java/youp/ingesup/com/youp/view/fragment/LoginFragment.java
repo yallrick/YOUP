@@ -1,4 +1,4 @@
-package youp.ingesup.com.youp;
+package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -12,6 +12,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import javax.xml.datatype.Duration;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import youp.ingesup.com.youp.R;
+import youp.ingesup.com.youp.model.Auth;
+import youp.ingesup.com.youp.model.bean.User;
+import youp.ingesup.com.youp.model.services.UserService;
 
 public class LoginFragment extends Fragment{
     private OnFragmentInteractionListener mListener;
@@ -62,8 +71,6 @@ public class LoginFragment extends Fragment{
 
         // Inflate the layout for this fragment
         return root;
-
-
     }
 
     @Override
@@ -93,6 +100,25 @@ public class LoginFragment extends Fragment{
         if(ControleSaisie())
         {
             /* TODO: Envoi des informations à l'API et étude du retour */
+
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+            UserService service = restAdapter.create(UserService.class);
+            service.login(username, password, new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+                    Auth auth = Auth.getInstance(user, user.getToken());
+                    Toast.makeText(getActivity(), "Connexion réussie.", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getActivity(), "Connexion échouée.", Toast.LENGTH_LONG).show();
+                }
+            });
+
         }
     }
 

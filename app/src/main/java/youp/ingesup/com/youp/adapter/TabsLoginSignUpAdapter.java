@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import youp.ingesup.com.youp.LoginFragment;
 import youp.ingesup.com.youp.SignUpFragment;
+import youp.ingesup.com.youp.view.fragment.LoginFragment;
 
 public class TabsLoginSignUpAdapter extends FragmentPagerAdapter {
     /**

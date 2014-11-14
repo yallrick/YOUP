@@ -4,6 +4,7 @@ package youp.ingesup.com.youp.view;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +25,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import youp.ingesup.com.youp.R;
+import youp.ingesup.com.youp.model.Auth;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -67,6 +70,8 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.e("NavigationDrawer", "onCreate()");
+
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -89,26 +94,33 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.e("NavigationDrawerFragment", "onCreateView()");
+
+
+        mDrawerListView = (ListView) inflater.inflate( R.layout.fragment_navigation_drawer, container, false);
+        Log.e("NavigationDrawerFragment", "onCreateView() -> inflate");
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
+        Log.e("NavigationDrawerFragment", "onCreateView() -> setOnCLick");
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                         getActionBar().getThemedContext(),
                         android.R.layout.simple_list_item_activated_1,
                         android.R.id.text1,
                         new String[]{
                                 getString(R.string.title_section1),
-                                getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                                Auth.isLoggedIn() ? getString(R.string.title_section2_logged_in) : getString(R.string.title_section2),
+                                Auth.isLoggedIn() ? getString(R.string.title_section3_logged_in) : getString(R.string.title_section3),
                 }));
+        Log.e("NavigationDrawerFragment", "onCreateView() -> setAdapter");
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        Log.e("NavigationDrawerFragment", "onCreateView() -> setChecked");
         return mDrawerListView;
     }
 
@@ -191,13 +203,42 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
+
         mCurrentSelectedPosition = position;
+        Log.e("NavigationDrawerFragment", "selectItem() -> " + position);
+
+        // note : position commence à 0
+
+        boolean connected = Auth.isLoggedIn();
+
+
+
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
         }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
+
+        if(!connected){
+            switch (position){
+                case 1: // Connexion
+
+                    Intent intentSignIn = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intentSignIn);
+
+                    return;
+                case 2: // Création de compte
+
+                    Intent intentSignUp = new Intent(getActivity(), LoginActivity.class);
+                    // TODO ajouter un paramètre en intent pour préciser d'aller directement dans le deuxième onglet
+                    startActivity(intentSignUp);
+
+                    return;
+            }
+        }
+
+
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
         }

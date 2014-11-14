@@ -6,6 +6,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 
 /**
@@ -32,7 +33,8 @@ public interface UserService {
                     @Field("CodePostal") String codePostal,
                     Callback<User> callback);
 
-    // TODO delete
+    @GET("api/Friend/{id}")
+    void getFriends(@Path("id") String idUser, Callback<Friend[]> callback);
 
     // TODO create
 

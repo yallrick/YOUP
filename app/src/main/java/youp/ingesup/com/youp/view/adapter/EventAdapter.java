@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,7 +49,13 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
         TextView price = (TextView)convertView.findViewById(R.id.price);
         TextView title = (TextView)convertView.findViewById(R.id.title);
 
-        // TODO : load image from URL
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+
+        /*/ TODO get image URL
+        String imageURL = ?;
+        imageLoader.displayImage(imageURL, imageView);
+        /**/
 
         date.setText(currentItem.getDate());
 

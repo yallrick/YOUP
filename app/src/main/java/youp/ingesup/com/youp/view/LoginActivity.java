@@ -17,6 +17,8 @@ import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 public class LoginActivity extends FragmentActivity implements
         ActionBar.TabListener, LoginFragment.OnFragmentInteractionListener, SignUpFragment.OnFragmentInteractionListener{
 
+    public final static String PARAM_GO_SIGN_UP = "PARAM_GO_SIGN_UP";
+
     private ViewPager viewPager;
     private TabsLoginSignUpAdapter mAdapter;
     private ActionBar actionBar;
@@ -40,8 +42,7 @@ public class LoginActivity extends FragmentActivity implements
 
         // Adding Tabs
         for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
+            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
         }
 
         /**
@@ -64,6 +65,14 @@ public class LoginActivity extends FragmentActivity implements
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
+
+
+        boolean goSignUp = getIntent().getBooleanExtra(PARAM_GO_SIGN_UP, false);
+        if(goSignUp){
+            viewPager.setCurrentItem(1);
+        }
+
     }
 
 

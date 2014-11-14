@@ -40,8 +40,6 @@ public class SignUpFragment extends Fragment{
         View root =  inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         Button btDatePicker = (Button)root.findViewById(R.id.btChooseDateSignUp);
-        tVDateNaissance = (TextView)root.findViewById(R.id.tVDateNaissanceSignUp);
-
         btDatePicker.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -49,6 +47,10 @@ public class SignUpFragment extends Fragment{
                 showDialog();
             }
         });
+        tVDateNaissance = (TextView)root.findViewById(R.id.tVDateNaissanceSignUp);
+
+        Button btSignUp = (Button)root.findViewById(R.id.bt_SignUp);
+
 
         /** Get the current date **/
         final Calendar cal = Calendar.getInstance();

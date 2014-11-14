@@ -5,4 +5,5 @@
     <color name="DarkBlue">#414F82</color>
     <color name="grey">#ffcacaca</color>
     <color name="grey_light">#fff5f5f5</color>
+    <color name="write">#FFFFFF</color>
 </resources>

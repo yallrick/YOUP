@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Title maybe really long"
+            android:gravity="center_horizontal"
+            android:id="@+id/tvTitleEventDetails" />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_event_background"
+            android:layout_margin="4dp"
+            android:padding="4dp">
+
+
+            <ImageView
+                android:id="@+id/imgDetails"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@color/Blue"
+                android:layout_margin="4dp"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/imgDetails"
+                android:layout_alignTop="@id/imgDetails"
+                android:layout_alignBottom="@id/imgDetails"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout">
+
+                <LinearLayout
+                    android:id="@+id/duration_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/dateDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="12/11/2014"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text=" - "/>
+
+                    <TextView
+                        android:id="@+id/timeDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="18:00"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text=" - "/>
+
+                    <TextView
+                        android:id="@+id/durationDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="1 day"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/locationDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:text="Location" />
+
+                <TextView
+                    android:id="@+id/categoryDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:text="Category" />
+
+
+                <TextView
+                    android:id="@+id/priceDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:text="1337 €" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignStart="@+id/img">
+
+                <!-- Boutton Subscribe, Organizer, Share -->
+                <Button
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_clickable_blue"
+                    android:layout_height="35dp"
+                    android:layout_weight="0.85"
+                    android:text="Organizer"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:id="@+id/btOrganizerDetails" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_clickable_white"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:text="Subscribe"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:id="@+id/btSubscribeDetails" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_clickable_white"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:text="Share"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:id="@+id/btShareDetails" />
+
+                </LinearLayout>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tvDescriptionDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_event_background"
+            android:textSize="18dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/lorem_ipsum" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

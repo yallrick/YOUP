@@ -6,6 +6,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 
@@ -17,8 +18,8 @@ public interface UserService {
     @GET("/api/User/{id}")
     String getUser(@Path("id") String id, Callback<User> callback);
 
-    @POST("/api/Auth?Email={Email}&Pass={Pass}&Device=Android")
-    void login(@Path("Email") String username, @Path("Pass") String password, Callback<User> callback);
+    @POST("/api/Auth?Email={mail}&Pass={pass}&Device={device}")
+    void login(@Query("mail") String username, @Query("pass") String password, @Query("device") String device, Callback<User> callback);
 
     @FormUrlEncoded
     @POST("/api/User")
@@ -33,7 +34,7 @@ public interface UserService {
                     @Field("CodePostal") String codePostal,
                     Callback<User> callback);
 
-    @GET("api/Friend/{id}")
+    @GET("/api/Friend/{id}")
     void getFriends(@Path("id") String idUser, Callback<Friend[]> callback);
 
     // TODO create

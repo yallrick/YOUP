@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class EventFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-
+                Toast.makeText(getActivity(), "Impossible de charger les events", Toast.LENGTH_LONG).show();
             }
         });
 

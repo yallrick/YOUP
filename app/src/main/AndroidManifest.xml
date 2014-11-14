@@ -22,10 +22,11 @@
         </activity>
 
         <activity android:name=".view.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_activity_login" />
 
+        <activity android:name=".view.MyAccountActivity"
+            android:label="@string/title_activity_my_account"/>
 
-        </activity>
     </application>
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />

@@ -231,8 +231,22 @@ public class NavigationDrawerFragment extends Fragment {
                 case 2: // Création de compte
 
                     Intent intentSignUp = new Intent(getActivity(), LoginActivity.class);
-                    // TODO ajouter un paramètre en intent pour préciser d'aller directement dans le deuxième onglet
+                    intentSignUp.putExtra(LoginActivity.PARAM_GO_SIGN_UP, true);
                     startActivity(intentSignUp);
+
+                    return;
+            }
+        }else{
+            switch (position){
+                case 1: // My Account
+
+                    Intent intentMyAccount = new Intent(getActivity(), MyAccountActivity.class);
+                    startActivity(intentMyAccount);
+
+                    return;
+                case 2: // Déconnexion
+
+                    // TODO : déconnexion
 
                     return;
             }

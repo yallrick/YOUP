@@ -193,7 +193,7 @@ public class SignUpFragment extends Fragment{
             String firstName = etFirstName.getText().toString();
             String birthday = tVDateNaissance.getText().toString();
             String city = etCity.getText().toString();
-            String zip = etZIPCode.getText().toString();
+            String zipcode = etZIPCode.getText().toString();
             boolean gender = true;
 
             if(rbFemale.isChecked())
@@ -201,7 +201,7 @@ public class SignUpFragment extends Fragment{
 
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
             final UserService service = restAdapter.create(UserService.class);
-            service.createUser(username, password, firstName, lastName, gender, mail, birthday, city, zip, new Callback<User>() {
+            service.createUser(username, password, firstName, lastName, gender, mail, birthday, city, zipcode, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
                     service.login(username, password, new Callback<User>() {

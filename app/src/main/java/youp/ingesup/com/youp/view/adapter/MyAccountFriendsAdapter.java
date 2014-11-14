@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
@@ -37,7 +39,8 @@ public class MyAccountFriendsAdapter extends ArrayAdapter<Friend> {
 
         Friend currentItem = getItem(position);
 
-        // TODO : charger l'image de profile
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.displayImage(currentItem.getUrlPhoto(), imageView);
         textView.setText(currentItem.getPseudo());
 
         return convertView;

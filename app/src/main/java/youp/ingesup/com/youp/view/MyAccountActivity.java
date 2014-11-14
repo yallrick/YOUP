@@ -8,15 +8,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 import youp.ingesup.com.youp.R;
-import youp.ingesup.com.youp.SignUpFragment;
 import youp.ingesup.com.youp.adapter.MyAccountAdapter;
-import youp.ingesup.com.youp.view.fragment.LoginFragment;
 
 /**
  * Created by Vincent del Valle on 14/11/2014.
  */
 public class MyAccountActivity extends FragmentActivity implements
-        ActionBar.TabListener, LoginFragment.OnFragmentInteractionListener, SignUpFragment.OnFragmentInteractionListener {
+        ActionBar.TabListener {
 
 
     private String[] tabs = { "Friends", "Events", "My Profile"};
@@ -51,10 +49,6 @@ public class MyAccountActivity extends FragmentActivity implements
 
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {

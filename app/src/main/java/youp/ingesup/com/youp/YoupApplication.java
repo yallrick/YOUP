@@ -10,12 +10,11 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  */
 public class YoupApplication extends Application {
 
-    public YoupApplication(){
-        super();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
         ImageLoader.getInstance().init(config);
-
     }
-
 }

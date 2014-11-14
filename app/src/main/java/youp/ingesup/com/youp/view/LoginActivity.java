@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-import youp.ingesup.com.youp.SignUpFragment;
 import youp.ingesup.com.youp.view.fragment.LoginFragment;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.adapter.TabsLoginSignUpAdapter;
+
+import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 
 
 public class LoginActivity extends FragmentActivity implements

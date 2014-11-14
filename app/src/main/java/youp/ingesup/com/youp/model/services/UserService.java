@@ -2,6 +2,7 @@ package youp.ingesup.com.youp.model.services;
 
 import retrofit.Callback;
 import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -12,13 +13,14 @@ import youp.ingesup.com.youp.model.bean.User;
  */
 public interface UserService {
 
-    @GET("api/User/{id}")
+    @GET("/api/User/{id}")
     String getUser(@Path("id") String id, Callback<User> callback);
 
-    @POST("api/Auth?Email={Email}&Pass={Pass}&Device=Android")
+    @POST("/api/Auth?Email={Email}&Pass={Pass}&Device=Android")
     void login(@Path("Email") String username, @Path("Pass") String password, Callback<User> callback);
 
-    @POST("api/User")
+    @FormUrlEncoded
+    @POST("/api/User")
     void createUser(@Field("Pseudo") String pseudo,
                     @Field("MotDePasse") String pass,
                     @Field("Nom") String nom,

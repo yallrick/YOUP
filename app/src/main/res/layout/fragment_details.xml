@@ -3,7 +3,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,7 +62,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/dateDetails"
+                        android:id="@+id/tvDateDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -73,7 +75,7 @@
                         android:text=" - "/>
 
                     <TextView
-                        android:id="@+id/timeDetails"
+                        android:id="@+id/tvTimeDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -86,7 +88,7 @@
                         android:text=" - "/>
 
                     <TextView
-                        android:id="@+id/durationDetails"
+                        android:id="@+id/tvDurationDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -95,7 +97,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/locationDetails"
+                    android:id="@+id/tvLocationDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -103,7 +105,7 @@
                     android:text="Location" />
 
                 <TextView
-                    android:id="@+id/categoryDetails"
+                    android:id="@+id/tvCategoryDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -112,7 +114,7 @@
 
 
                 <TextView
-                    android:id="@+id/priceDetails"
+                    android:id="@+id/tvPriceDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -136,6 +138,7 @@
                     android:layout_height="35dp"
                     android:layout_weight="0.85"
                     android:text="Organizer"
+                    android:textSize="15dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
@@ -148,6 +151,7 @@
                     android:layout_height="35dp"
                     android:layout_weight="1"
                     android:text="Subscribe"
+                    android:textSize="15dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
@@ -160,6 +164,7 @@
                     android:layout_height="35dp"
                     android:layout_weight="1"
                     android:text="Share"
+                    android:textSize="15dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"

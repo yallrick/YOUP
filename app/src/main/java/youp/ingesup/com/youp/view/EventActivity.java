@@ -22,6 +22,8 @@ public class EventActivity extends FragmentActivity implements TabListener , Det
     private TabsEventAdapter mAdapter;
     private ActionBar actionBar;
 
+    public Integer eventID;
+
     // Tab titles
     private String[] tabs = { "Details", "Comments"};
 
@@ -38,6 +40,9 @@ public class EventActivity extends FragmentActivity implements TabListener , Det
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        // Récupération de l'ID de l'event
+        eventID = getIntent().getExtras().getInt("eventID");
 
         // Adding Tabs
         for (String tab_name : tabs) {

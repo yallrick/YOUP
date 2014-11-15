@@ -1,6 +1,8 @@
 package youp.ingesup.com.youp.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.bean.Location;
 import youp.ingesup.com.youp.model.services.EventService;
+import youp.ingesup.com.youp.view.EventActivity;
 
 /**
  * Created by Vincent del Valle on 07/11/2014.
@@ -69,6 +72,8 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
 
         // récupération du lieu
 
+
+
         DateTime dateTime = new DateTime(currentItem.getDate());
         date.setText(dateTime.getDateInFrench());
 
@@ -102,8 +107,6 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
             }
         });
         categoryView.setText("Loading...");
-
-
 
         return convertView;
     }

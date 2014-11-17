@@ -116,7 +116,7 @@ public class LoginFragment extends Fragment{
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Toast.makeText(getActivity(), "Connexion échouée.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Connexion impossible. Code " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
                 }
             });
 

@@ -71,7 +71,7 @@ public interface EventService {
 
 
     @GET("/api/Evenement/{id}")
-    void getEvent(@Path("id") String idEvent);
+    void getEvent(@Path("id") String idEvent, Callback<Evenement> callback);
 
     @PUT("/api/Evenement/{id}?prenium={prenium}&end_inscription={end_inscription}&total_people={total_people}&description={description}")
     void setEvent(@Path("id") String eventId,

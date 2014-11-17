@@ -1,11 +1,14 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
+import youp.ingesup.com.youp.view.EventActivity;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
 /**
@@ -52,6 +56,24 @@ public class EventFragment extends Fragment {
         });
 
         listView = (ListView)viewRoot.findViewById(R.id.list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                try{
+                    Intent intent = new Intent(getActivity(), EventActivity.class);
+                    Integer eventID = events.get(position).getId();
+                    intent.putExtra("eventID", eventID );
+                    startActivity(intent);
+                }catch(Exception ex)
+                {
+                    Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
+                }
+
+            }
+
+        });
 
         return viewRoot;
     }

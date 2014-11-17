@@ -32,15 +32,9 @@ public class LoginFragment extends Fragment{
     private EditText etUsername;
     private EditText etPassword;
 
-    public LoginFragment() {
-
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -92,7 +86,6 @@ public class LoginFragment extends Fragment{
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
 
@@ -100,8 +93,6 @@ public class LoginFragment extends Fragment{
     {
         if(checkValidation())
         {
-            /* TODO: Envoi des informations à l'API et étude du retour */
-
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
 

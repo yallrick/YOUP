@@ -10,7 +10,7 @@ import java.util.List;
 public class User {
 
     @SerializedName("Utilisateur_Id")
-    private int id;
+    private Integer id;
 
     @SerializedName("Pseudo")
     private String pseudo;
@@ -61,13 +61,13 @@ public class User {
     private List<Categorie> categories;
 
 
-    public User(int _id, String _nom)
+    public User(Integer _id, String _nom)
     {
         this.id = _id;
         this.nom = _nom;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

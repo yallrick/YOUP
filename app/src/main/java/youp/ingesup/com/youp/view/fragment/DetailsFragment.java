@@ -8,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -23,10 +20,7 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
-import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.EventActivity;
 
 /**
  * Created by Damiano on 14/11/2014.
@@ -94,7 +88,7 @@ public class DetailsFragment extends Fragment {
         });
 
         /* Récupérer les informations de l'event : Indent + Appel API */
-        this.eventID = ((EventActivity)getActivity()).eventID;
+        this.eventID = MainEventFragment.eventID;
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
         EventService service = restAdapter.create(EventService.class);

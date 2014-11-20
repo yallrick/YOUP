@@ -31,6 +31,7 @@ dependencies {
 
 // Adding R2M dependencies and public repo
 // Go to https://github.com/magnetsystems/r2m-plugin-android for more info
+/**
 dependencies {
     compile("com.magnet:r2m-sdk-android:1.1.0@aar") {
         transitive = true
@@ -40,4 +41,4 @@ repositories {
     maven {
         url "http://repo.magnet.com:8081/artifactory/public/"
     }
-}
+}**/

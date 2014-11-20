@@ -1,48 +1,60 @@
-package youp.ingesup.com.youp.view;
+package youp.ingesup.com.youp.view.fragment;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import youp.ingesup.com.youp.view.fragment.LoginFragment;
 import youp.ingesup.com.youp.R;
-import youp.ingesup.com.youp.adapter.TabsLoginSignUpAdapter;
+import youp.ingesup.com.youp.adapter.TabsEventAdapter;
 
-import youp.ingesup.com.youp.view.fragment.SignUpFragment;
+import static android.app.ActionBar.TabListener;
 
-
-public class LoginActivity extends FragmentActivity implements
-        ActionBar.TabListener, LoginFragment.OnFragmentInteractionListener, SignUpFragment.OnFragmentInteractionListener{
-
-    public final static String PARAM_GO_SIGN_UP = "PARAM_GO_SIGN_UP";
-
+/**
+ * Created by Damiano on 14/11/2014.
+ */
+public class MainEventFragment extends Fragment implements TabListener , DetailsFragment.OnFragmentInteractionListener {
     private ViewPager viewPager;
-    private TabsLoginSignUpAdapter mAdapter;
+    private TabsEventAdapter mAdapter;
     private ActionBar actionBar;
 
+    public static final String PARAM_ID_EVENT = "PARAM_ID_EVENT";
+    public static final String PARAM_ID_PROFILE = "PARAM_ID_PROFILE";
+
+    public static Integer eventID;
+    public int profileID;
+
     // Tab titles
-    private String[] tabs = { "Login", "Sign Up"};
+    private String[] tabs = { "Details", "Comments"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View fragmentView = inflater.inflate(R.layout.activity_event, container, false);
 
         // Initilization
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new TabsLoginSignUpAdapter(getSupportFragmentManager());
+        viewPager = (ViewPager) fragmentView.findViewById(R.id.pager);
+        actionBar = getActivity().getActionBar();
+        mAdapter = new TabsEventAdapter(getActivity().getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+        // Récupération de l'ID de l'event
+        eventID = getActivity().getIntent().getExtras().getInt(PARAM_ID_EVENT);
+        profileID = getActivity().getIntent().getExtras().getInt(PARAM_ID_PROFILE);
+
         // Adding Tabs
         for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
+            actionBar.addTab(actionBar.newTab().setText(tab_name)
+                    .setTabListener(this));
         }
 
         /**
@@ -66,15 +78,8 @@ public class LoginActivity extends FragmentActivity implements
             }
         });
 
-
-
-        boolean goSignUp = getIntent().getBooleanExtra(PARAM_GO_SIGN_UP, false);
-        if(goSignUp){
-            viewPager.setCurrentItem(1);
-        }
-
+        return fragmentView;
     }
-
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {

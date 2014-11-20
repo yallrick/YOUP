@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
+import youp.ingesup.com.youp.view.fragment.MainLoginFragment;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -224,14 +225,14 @@ public class NavigationDrawerFragment extends Fragment {
             switch (position){
                 case 1: // Connexion
 
-                    Intent intentSignIn = new Intent(getActivity(), LoginActivity.class);
+                    Intent intentSignIn = new Intent(getActivity(), MainLoginFragment.class);
                     startActivity(intentSignIn);
 
                     return;
                 case 2: // Création de compte
 
-                    Intent intentSignUp = new Intent(getActivity(), LoginActivity.class);
-                    intentSignUp.putExtra(LoginActivity.PARAM_GO_SIGN_UP, true);
+                    Intent intentSignUp = new Intent(getActivity(), MainLoginFragment.class);
+                    intentSignUp.putExtra(MainLoginFragment.PARAM_GO_SIGN_UP, true);
                     startActivity(intentSignUp);
 
                     return;

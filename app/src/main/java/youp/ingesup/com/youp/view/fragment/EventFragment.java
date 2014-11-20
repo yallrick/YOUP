@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -23,7 +22,6 @@ import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.view.EventActivity;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
 /**
@@ -68,8 +66,8 @@ public class EventFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try{
-                    Intent intent = new Intent(getActivity(), EventActivity.class);
-                    intent.putExtra(EventActivity.PARAM_ID_EVENT, events.get(position).getId());
+                    Intent intent = new Intent(getActivity(), MainEventFragment.class);
+                    intent.putExtra(MainEventFragment.PARAM_ID_EVENT, events.get(position).getId());
                     //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
                     startActivity(intent);
                 }catch(Exception ex)

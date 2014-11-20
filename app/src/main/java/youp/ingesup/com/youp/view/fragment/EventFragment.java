@@ -69,7 +69,7 @@ public class EventFragment extends Fragment {
 
                 try{
                     Intent intent = new Intent(getActivity(), EventActivity.class);
-                    intent.putExtra(EventActivity.PARAM_ID_EVENT, events.get(position).getId());
+                    intent.putExtra(EventActivity.PARAM_ID_EVENT, events.get(position).getEvenement_id());
                     //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
                     startActivity(intent);
                 }catch(Exception ex)

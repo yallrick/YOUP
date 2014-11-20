@@ -12,24 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
-import youp.ingesup.com.youp.model.bean.Evenement;
-import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.view.EventActivity;
-import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
 /**
  * Created by Damiano on 14/11/2014.
  */
-public class CommentsFragment  extends android.app.Fragment {
+public class CommentsFragment  extends Fragment {
+
+    private OnFragmentInteractionListener mListener;
 
     //private List<Comment> comments;
     private ListView listView;
@@ -74,6 +65,10 @@ public class CommentsFragment  extends android.app.Fragment {
 
 
         return viewRoot;
+    }
+
+    public interface OnFragmentInteractionListener {
+        public void onFragmentInteraction(Uri uri);
     }
 }
 

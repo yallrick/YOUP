@@ -74,39 +74,18 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
 
 
 
-        DateTime dateTime = new DateTime(currentItem.getDate());
+        DateTime dateTime = new DateTime(currentItem.getDateEvenement());
         date.setText(dateTime.getDateInFrench());
 
 
         price.setText(currentItem.getPrix() + " €");
-        title.setText(currentItem.getTitre());
-
-        serviceEvent.getLocation(String.valueOf(currentItem.getLieuId()), new Callback<Location>() {
-            @Override
-            public void success(Location location, Response response) {
-                locationView.setText("empty");
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                locationView.setText("#fail ("+currentItem.getLieuId()+")");
-            }
-        });
-        locationView.setText("Loading...");
+        title.setText(currentItem.getTitreEvenement());
 
 
-        serviceEvent.getCategories(String.valueOf(currentItem.getCategorieId()), new Callback<Categorie>() {
-            @Override
-            public void success(Categorie categorie, Response response) {
-                categoryView.setText(categorie.getLabel());
-            }
+        locationView.setText(currentItem.getAdresse().getPays());
 
-            @Override
-            public void failure(RetrofitError error) {
-                categoryView.setText("#fail " + error.getResponse().getStatus());
-            }
-        });
-        categoryView.setText("Loading...");
+
+        categoryView.setText(currentItem.getCategorie_Libelle());
 
         return convertView;
     }

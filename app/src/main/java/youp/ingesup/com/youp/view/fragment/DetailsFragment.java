@@ -13,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
+import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.EventService;
@@ -40,6 +43,8 @@ public class DetailsFragment extends Fragment {
     private ImageView img;
 
     private Button btOrganizer;
+
+    private Integer eventID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,9 +81,10 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                /* TODO: Appeler la route de subscription */
+                Subscription();
             }
         });
+
         btShare.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -88,15 +94,26 @@ public class DetailsFragment extends Fragment {
         });
 
         /* Récupérer les informations de l'event : Indent + Appel API */
-        Integer eventID = ((EventActivity)getActivity()).eventID;
+        this.eventID = ((EventActivity)getActivity()).eventID;
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
         EventService service = restAdapter.create(EventService.class);
-        service.getEvent(eventID.toString(), new Callback<Evenement>() {
+        service.getEvent(this.eventID.toString(), new Callback<Evenement>() {
             @Override
             public void success(Evenement evenement, Response response) {
                 tvTitle.setText(evenement.getTitre());
                 /* TODO: Remplir les autres champs */
+                // tvDescription.setText(evenement.getDescription());
+
+                // tvCategorie.setText("Loading...");
+
+                DateTime dateTime = new DateTime(evenement.getDate());
+                tvDate.setText(dateTime.getDateInFrench());
+                tvPrice.setText(evenement.getPrix() + " €");
+                tvLocation.setText(evenement.getAdresse());
+                //ImageLoader imageLoader = ImageLoader.getInstance();
+                //imageLoader.displayImage(evenement.getImage, img);
+
             }
 
             @Override
@@ -129,4 +146,12 @@ public class DetailsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }
+
+    private void Subscription()
+    {
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+        EventService service = restAdapter.create(EventService.class);
+        service.joinEvent(this.eventID.toString(),Auth.getInstance().getUser().getId().toString());
+    }
+
 }

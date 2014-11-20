@@ -101,7 +101,10 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Connexion échouée.", Toast.LENGTH_LONG).show();
+                Activity context = getActivity();
+
+                if(context != null)
+                    Toast.makeText(context, "Connexion échouée.", Toast.LENGTH_LONG).show();
             }
         });
 

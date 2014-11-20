@@ -48,10 +48,10 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if( true || convertView == null){
+        //if(convertView == null){
             LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = vi.inflate(resource, parent, false);
-        }
+        //}
 
         final Evenement currentItem = evenements.get(position);
 

@@ -1,5 +1,6 @@
 package youp.ingesup.com.youp.view.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot = inflater.inflate( R.layout.fragment_event, container, false);
 
+        // http://www.mocky.io/v2/546c52f8a112329207713535
+        // http://youp-evenementapi.azurewebsites.net/
         RestAdapter serviceEventBuilder = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService serviceEvent = serviceEventBuilder.create(EventService.class);
         serviceEvent.getEvents(new Callback<List<Evenement>>() {
@@ -51,7 +54,10 @@ public class EventFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Impossible de charger les events", Toast.LENGTH_LONG).show();
+                Activity  context = getActivity();
+
+                if(context != null)
+                    Toast.makeText(context, "Impossible de charger les events. " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -63,8 +69,8 @@ public class EventFragment extends Fragment {
 
                 try{
                     Intent intent = new Intent(getActivity(), EventActivity.class);
-                    Integer eventID = events.get(position).getId();
-                    intent.putExtra("eventID", eventID );
+                    intent.putExtra(EventActivity.PARAM_ID_EVENT, events.get(position).getId());
+                    //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
                     startActivity(intent);
                 }catch(Exception ex)
                 {

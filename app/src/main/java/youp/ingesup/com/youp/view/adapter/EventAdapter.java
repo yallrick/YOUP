@@ -62,29 +62,28 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
         TextView price = (TextView)convertView.findViewById(R.id.price);
         TextView title = (TextView)convertView.findViewById(R.id.title);
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
 
+        // image
+        String imageURL = currentItem.getImageUrl();
+        if( imageURL != null && !imageURL.isEmpty()) {
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.displayImage(imageURL, imageView);
+        }
 
-        /*/ TODO get image URL
-        String imageURL = ?;
-        imageLoader.displayImage(imageURL, imageView);
-        /**/
-
-        // récupération du lieu
-
-
-
+        // date
         DateTime dateTime = new DateTime(currentItem.getDateEvenement());
         date.setText(dateTime.getDateInFrench());
 
-
+        // prix
         price.setText(currentItem.getPrix() + " €");
+
+        // titre
         title.setText(currentItem.getTitreEvenement());
 
-
+        // lieu (pays)
         locationView.setText(currentItem.getAdresse().getPays());
 
-
+        // category
         categoryView.setText(currentItem.getCategorie_Libelle());
 
         return convertView;

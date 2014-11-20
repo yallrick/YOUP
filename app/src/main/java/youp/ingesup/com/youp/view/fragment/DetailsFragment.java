@@ -152,9 +152,13 @@ public class DetailsFragment extends Fragment {
 
     private void Subscription()
     {
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
-        EventService service = restAdapter.create(EventService.class);
-        service.joinEvent(this.eventID.toString(),Auth.getInstance().getUser().getId().toString());
+        if(Auth.isLoggedIn()) {
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+            EventService service = restAdapter.create(EventService.class);
+            service.joinEvent(this.eventID.toString(), Auth.getInstance().getUser().getId().toString());
+        }else{
+            Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

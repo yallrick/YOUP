@@ -112,8 +112,9 @@ public class LoginFragment extends Fragment{
                 public void success(User user, Response response) {
 
 
-
-                    Auth auth = Auth.getInstance(user, user.getToken());
+                    if(user != null) {
+                        Auth auth = Auth.getInstance(user, user.getToken());
+                    }
                     Toast.makeText(getActivity(), "Connexion réussie.", Toast.LENGTH_LONG).show();
                 }
 

@@ -130,7 +130,7 @@ public class EventFragment extends Fragment {
                     if(evenements != null && evenements.size() >= 1)
                         maxId = String.valueOf(evenements.get(evenements.size() - 1).getEvenement_id());
 
-                    if(getActivity() != null) {
+                    if(getActivity() != null && events != null) {
                         adapter = new EventAdapter(getActivity(), R.layout.item_event, events);
                         listView.setAdapter(adapter);
                     }

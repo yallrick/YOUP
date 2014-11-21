@@ -40,7 +40,12 @@ public interface UserService {
     @GET("/api/Friend/{id}")
     void getFriends(@Path("id") String idUser, Callback<Friend[]> callback);
 
-    // TODO create
+
+    @POST("/api/Friend")
+    void sendFriendRequest(@Query("utilisateur_id") String userId,
+                           @Query("ami_id") String friendId,
+                           Callback<Boolean> callback);
+
 
 
 

@@ -292,7 +292,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_example) {
 
-            // TODO reload timeline
             ((HomeActivity)getActivity()).tryToUpdateTimeline();
 
             return true;

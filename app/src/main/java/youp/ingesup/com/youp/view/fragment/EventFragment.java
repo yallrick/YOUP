@@ -1,5 +1,6 @@
 package youp.ingesup.com.youp.view.fragment;
 
+import android.app.ActionBar;
 import android.app.Activity;
 
 import android.content.Intent;
@@ -52,7 +53,11 @@ public class EventFragment extends Fragment {
         loadEvent = (ProgressBar)viewRoot.findViewById(R.id.loadEvent);
         listView = (ListView)viewRoot.findViewById(R.id.list);
 
-        getActivity().getActionBar().removeAllTabs();
+
+        ActionBar actionBar = getActivity().getActionBar();
+
+        actionBar.removeAllTabs();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 
         bottomView = new ProgressBar(getActivity());

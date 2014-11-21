@@ -231,7 +231,8 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 case 2: // Déconnexion
 
-                    // TODO : déconnexion
+                    Auth.logout();
+                    getActivity().finish();
 
                     return;
             }

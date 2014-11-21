@@ -81,7 +81,7 @@ public class MyAccountEventsFragment extends Fragment {
 
                 try{
 
-                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()));
+                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()), "detail");
                 }catch(Exception ex)
                 {
                     Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());

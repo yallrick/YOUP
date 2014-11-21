@@ -209,7 +209,7 @@ public class SignUpFragment extends Fragment{
                         public void success(User user, Response response) {
                             Auth auth = Auth.getInstance(user, user.getToken());
                             Toast.makeText(getActivity(), "Connexion réussie.", Toast.LENGTH_LONG).show();
-                            ((HomeActivity) getActivity()).goToFragment(new EventFragment());
+                            ((HomeActivity) getActivity()).goToFragment(new EventFragment(), "timeline");
                         }
 
                         @Override

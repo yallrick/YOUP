@@ -213,12 +213,12 @@ public class NavigationDrawerFragment extends Fragment {
             switch (position){
                 case 1: // Connexion
 
-                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false));
+                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false), "login");
 
                     return;
                 case 2:
 
-                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(true));
+                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(true), "sign_up");
 
                     return;
             }
@@ -226,12 +226,13 @@ public class NavigationDrawerFragment extends Fragment {
             switch (position){
                 case 1: // My Account
 
-                    ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(Auth.getInstance().getUser().getId()));
+                    ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(Auth.getInstance().getUser().getId()), "account");
 
                     return;
                 case 2: // Déconnexion
 
-                    // TODO : déconnexion
+                    Auth.logout();
+                    getActivity().finish();
 
                     return;
             }

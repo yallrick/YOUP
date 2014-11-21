@@ -206,7 +206,7 @@ public class MyAccountProfileFragment extends Fragment {
         {
             Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
 
-            ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false));
+            ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false), "login");
         }
     }
 }

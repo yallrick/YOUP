@@ -3,9 +3,10 @@ package youp.ingesup.com.youp.view;
 import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +22,7 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.services.UserService;
 import youp.ingesup.com.youp.view.fragment.EventFragment;
 
-public class HomeActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -34,6 +35,7 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
     private CharSequence mTitle;
 
     private FrameLayout container;
+    private android.support.v4.app.Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,18 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         mNavigationDrawerFragment.setUp( R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
         onNavigationDrawerItemSelected(0);
+
+
+    }
+
+
+    public void tryToUpdateTimeline(){
+        if(currentFragment != null){
+            EventFragment eventFragment = (EventFragment)currentFragment;
+            if(eventFragment != null){
+                eventFragment.loadEvents(null);
+            }
+        }
     }
 
     @Override
@@ -59,11 +73,13 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
 
         if(container != null) {
             container.removeAllViews();
-            Log.e("onNavigationDrawerItemSelected", "container is clean");
+        Log.e("onNavigationDrawerItemSelected", "container is clean");
 
-        FragmentManager fragmentManager = getFragmentManager();
+        currentFragment = PlaceholderFragment.newInstance(position + 1);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, currentFragment)
                 .commit();
         }
         else Log.e("onNavigationDrawerItemSelected", "container is null !!");

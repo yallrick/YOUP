@@ -14,7 +14,6 @@ import youp.ingesup.com.youp.R;
  * Created by Vincent del Valle on 14/11/2014.
  */
 public class MyAccountProfileFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,24 +27,6 @@ public class MyAccountProfileFragment extends Fragment {
         /** TODO: CREER LA VUE **/
         View root = inflater.inflate(R.layout.fragment_my_account_profile, container, false);
         return root;
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     public interface OnFragmentInteractionListener {

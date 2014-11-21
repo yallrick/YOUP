@@ -26,6 +26,7 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
 import youp.ingesup.com.youp.tool.FieldValidator;
+import youp.ingesup.com.youp.view.HomeActivity;
 
 public class SignUpFragment extends Fragment{
 
@@ -208,6 +209,7 @@ public class SignUpFragment extends Fragment{
                         public void success(User user, Response response) {
                             Auth auth = Auth.getInstance(user, user.getToken());
                             Toast.makeText(getActivity(), "Connexion réussie.", Toast.LENGTH_LONG).show();
+                            ((HomeActivity) getActivity()).goToFragment(new EventFragment());
                         }
 
                         @Override

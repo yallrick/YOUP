@@ -3,8 +3,6 @@ package youp.ingesup.com.youp.view.fragment;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -28,7 +26,8 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.view.MyAccountActivity;
+import youp.ingesup.com.youp.view.HomeActivity;
+import youp.ingesup.com.youp.view.MainAccountFragment;
 
 /**
  * Created by Damiano on 14/11/2014.
@@ -216,9 +215,7 @@ public class DetailsFragment extends Fragment {
 
 
         try{
-            Intent intent = new Intent(getActivity(), MyAccountActivity.class);
-            intent.putExtra(MyAccountActivity.PARAM_ID_PROFILE, id_organizer);
-            startActivity(intent);
+            ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(id_organizer));
         }catch(Exception ex)
         {
             Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());

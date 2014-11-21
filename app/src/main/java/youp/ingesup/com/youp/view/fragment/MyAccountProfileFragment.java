@@ -64,6 +64,8 @@ public class MyAccountProfileFragment extends Fragment {
             }
         });
 
+        ChargementDonnees();
+
         return root;
     }
 
@@ -89,4 +91,8 @@ public class MyAccountProfileFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    private void ChargementDonnees()
+    {
+
+    }
 }

@@ -135,29 +135,23 @@ public class MyAccountProfileFragment extends Fragment {
         imgSexe.setImageResource(imageSexe);
 
 
-
-        if(String.valueOf(Auth.getInstance().getUser().getId()).equals(String.valueOf(MainAccountFragment.profileID)))
-            buttonBecomeFriend.setVisibility(View.GONE);
-        else {
-            if(Auth.getInstance() != null)
-            {
+        if(Auth.isLoggedIn()) {
+            buttonBecomeFriend.setVisibility(View.VISIBLE);
+            if (String.valueOf(Auth.getInstance().getUser().getId()).equals(String.valueOf(MainAccountFragment.profileID)))
+                buttonBecomeFriend.setVisibility(View.GONE);
+            else {
                 final Integer profile_id = Auth.getInstance().getUser().getId();
                 userService.getFriends(profile_id.toString(), new Callback<Friend[]>() {
                     @Override
-                    public void success(Friend[] users, Response response)
-                    {
-                        if(users == null || users.length == 0)
-                        {
+                    public void success(Friend[] users, Response response) {
+                        if (users == null || users.length == 0) {
                             buttonBecomeFriend.setVisibility(View.GONE);
-                        }
-                        else
-                        {
+                        } else {
                             List<Friend> friends = new ArrayList<Friend>();
                             Collections.addAll(friends, users);
 
-                            for(Friend f:friends)
-                            {
-                                if(f.getId() == profile_id)
+                            for (Friend f : friends) {
+                                if (f.getId() == profile_id)
                                     buttonBecomeFriend.setVisibility(View.GONE);
                             }
                         }
@@ -171,15 +165,19 @@ public class MyAccountProfileFragment extends Fragment {
                 });
             }
 
-
-
             buttonBecomeFriend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DevenirAmi();
                 }
             });
+        }else{
+            buttonBecomeFriend.setVisibility(View.GONE);
         }
+
+
+
+
     }
 
     private void DevenirAmi()

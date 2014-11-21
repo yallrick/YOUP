@@ -54,6 +54,9 @@ public class MyAccountEventsFragment extends Fragment {
         serviceEvent.getEvents(profile_id.toString(),new Callback<List<Evenement>>() {
             @Override
             public void success(List<Evenement> evenements, Response response) {
+                if(evenements == null)
+                    return;
+
                 events = evenements;
 
                 EventAdapter adapter = new EventAdapter(getActivity(), R.layout.item_event, events);

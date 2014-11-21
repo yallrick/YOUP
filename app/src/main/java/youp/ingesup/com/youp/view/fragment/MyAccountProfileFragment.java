@@ -22,6 +22,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
+import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
@@ -90,6 +91,7 @@ public class MyAccountProfileFragment extends Fragment {
             @Override
             public void success(User profile, Response response) {
                 user = profile;
+                ChargementDonnees();
             }
 
             @Override
@@ -98,7 +100,6 @@ public class MyAccountProfileFragment extends Fragment {
             }
         });
 
-        ChargementDonnees();
 
         return root;
     }
@@ -112,10 +113,16 @@ public class MyAccountProfileFragment extends Fragment {
         tvPseudo.setText(user.getPseudo());
         tvNom.setText(user.getNom());
         tvPrenom.setText(user.getPrenom());
-        tvDateNaissance.setText(user.getDateNaissance());
+
+        DateTime dateTime = new DateTime(user.getDateNaissance());
+        tvDateNaissance.setText(dateTime.getDay() + "/" + dateTime.getMonth() + "/" + dateTime.getYear());
+
         tvVille.setText(user.getVille());
         tvMetier.setText(user.getMetier());
-        tvDateInscription.setText(user.getDateInscription());
+
+        dateTime = new DateTime(user.getDateInscription());
+        tvDateInscription.setText(dateTime.getDay() + "/" + dateTime.getMonth() + "/" + dateTime.getYear());
+
         tvMail.setText(user.getAdresseMail());
         tvDescription.setText(user.getPresentation());
 

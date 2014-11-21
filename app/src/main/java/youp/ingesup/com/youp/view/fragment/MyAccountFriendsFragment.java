@@ -53,7 +53,6 @@ public class MyAccountFriendsFragment extends Fragment {
             @Override
             public void success(Friend[] users, Response response) {
 
-
                 if(users == null || users.length == 0)
                 {
                     Toast.makeText(getActivity(), "Aucun ami.", Toast.LENGTH_LONG).show();

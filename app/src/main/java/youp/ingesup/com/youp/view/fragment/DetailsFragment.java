@@ -209,6 +209,11 @@ public class DetailsFragment extends Fragment {
 
     private void OpenOrganizer()
     {
+        if(evenement == null){
+
+            return;
+        }
+
         // ENVOYER VERS INTENT DE PROFIL
         Integer id_organizer = evenement.getOrganisateurId();
 

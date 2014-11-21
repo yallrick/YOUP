@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import retrofit.RestAdapter;
 import youp.ingesup.com.youp.R;
@@ -58,6 +59,16 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
         onNavigationDrawerItemSelected(0);
 
 
+    }
+
+    private static long back_pressed;
+
+    @Override
+    public void onBackPressed()
+    {
+        if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+        else Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+        back_pressed = System.currentTimeMillis();
     }
 
 

@@ -5,8 +5,4 @@
         android:title="@string/action_example"
         android:icon="@android:drawable/ic_popup_sync"
         android:showAsAction="withText|ifRoom" />
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
 </menu>

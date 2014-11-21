@@ -1,7 +1,5 @@
 package youp.ingesup.com.youp.model.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
@@ -9,57 +7,86 @@ import java.util.List;
  */
 public class User {
 
-    @SerializedName("Utilisateur_Id")
-    private Integer id;
 
-    @SerializedName("Pseudo")
-    private String pseudo;
 
-    @SerializedName("MotDePasse")
-    private String password;
+    @com.google.gson.annotations.SerializedName("Actif")
+    private Boolean actif;
 
-    @SerializedName("DateInscription")
-    private String dateInscription;
 
-    @SerializedName("Nom")
-    private String nom;
+    @com.google.gson.annotations.SerializedName("AdresseMail")
+    private String adresseMail;
 
-    @SerializedName("Prenom")
-    private String prenom;
 
-    @SerializedName("Sexe")
-    private boolean isMale;
+    @com.google.gson.annotations.SerializedName("Amis")
+    private List<Ami> amis;
 
-    @SerializedName("CodePostal")
+
+    @com.google.gson.annotations.SerializedName("Categories")
+    private List<Category> categories;
+
+
+    @com.google.gson.annotations.SerializedName("CodePostal")
     private String codePostal;
 
-    @SerializedName("PhotoChemin")
-    private String photoChemin;
 
-    @SerializedName("Situation")
-    private String situation;
+    @com.google.gson.annotations.SerializedName("DateInscription")
+    private String dateInscription;
 
-    @SerializedName("Actif")
-    private boolean actif;
 
-    @SerializedName("Partenaire")
-    private boolean partenaire;
+    @com.google.gson.annotations.SerializedName("DateNaissance")
+    private String dateNaissance;
 
-    @SerializedName("Presentation")
-    private String presentation;
 
-    @SerializedName("Metier")
+    @com.google.gson.annotations.SerializedName("Metier")
     private String metier;
 
-    @SerializedName("Token")
+
+    @com.google.gson.annotations.SerializedName("MotDePasse")
+    private String motDePasse;
+
+
+    @com.google.gson.annotations.SerializedName("Nom")
+    private String nom;
+
+
+    @com.google.gson.annotations.SerializedName("Partenaire")
+    private Boolean partenaire;
+
+
+    @com.google.gson.annotations.SerializedName("PhotoChemin")
+    private String photoChemin;
+
+
+    @com.google.gson.annotations.SerializedName("Prenom")
+    private String prenom;
+
+
+    @com.google.gson.annotations.SerializedName("Presentation")
+    private String presentation;
+
+
+    @com.google.gson.annotations.SerializedName("Pseudo")
+    private String pseudo;
+
+
+    @com.google.gson.annotations.SerializedName("Sexe")
+    private Boolean sexe;
+
+
+    @com.google.gson.annotations.SerializedName("Situation")
+    private String situation;
+
+
+    @com.google.gson.annotations.SerializedName("Token")
     private String token;
 
-    @SerializedName("Amis")
-    private List<User> amis;
 
-    @SerializedName("Categories")
-    private List<Categorie> categories;
+    @com.google.gson.annotations.SerializedName("Utilisateur_Id")
+    private Integer id;
 
+
+    @com.google.gson.annotations.SerializedName("Ville")
+    private String ville;
 
     public User(Integer _id, String _nom)
     {
@@ -67,60 +94,36 @@ public class User {
         this.nom = _nom;
     }
 
-    public Integer getId() {
-        return id;
+    public Boolean getActif() {
+        return actif;
     }
 
-    public void setId(int _id) {
-        this.id = _id;
+    public void setActif(Boolean actif) {
+        this.actif = actif;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getAdresseMail() {
+        return adresseMail;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setAdresseMail(String adresseMail) {
+        this.adresseMail = adresseMail;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Ami> getAmis() {
+        return amis;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAmis(List<Ami> amis) {
+        this.amis = amis;
     }
 
-    public String getDateInscription() {
-        return dateInscription;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setDateInscription(String dateInscription) {
-        this.dateInscription = dateInscription;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public boolean isMale() {
-        return isMale;
-    }
-
-    public void setMale(boolean isMale) {
-        this.isMale = isMale;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public String getCodePostal() {
@@ -131,44 +134,20 @@ public class User {
         this.codePostal = codePostal;
     }
 
-    public String getPhotoChemin() {
-        return photoChemin;
+    public String getDateInscription() {
+        return dateInscription;
     }
 
-    public void setPhotoChemin(String photoChemin) {
-        this.photoChemin = photoChemin;
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
     }
 
-    public String getSituation() {
-        return situation;
+    public String getDateNaissance() {
+        return dateNaissance;
     }
 
-    public void setSituation(String situation) {
-        this.situation = situation;
-    }
-
-    public boolean isActif() {
-        return actif;
-    }
-
-    public void setActif(boolean actif) {
-        this.actif = actif;
-    }
-
-    public boolean isPartenaire() {
-        return partenaire;
-    }
-
-    public void setPartenaire(boolean partenaire) {
-        this.partenaire = partenaire;
-    }
-
-    public String getPresentation() {
-        return presentation;
-    }
-
-    public void setPresentation(String presentation) {
-        this.presentation = presentation;
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
     public String getMetier() {
@@ -179,6 +158,78 @@ public class User {
         this.metier = metier;
     }
 
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Boolean getPartenaire() {
+        return partenaire;
+    }
+
+    public void setPartenaire(Boolean partenaire) {
+        this.partenaire = partenaire;
+    }
+
+    public String getPhotoChemin() {
+        return photoChemin;
+    }
+
+    public void setPhotoChemin(String photoChemin) {
+        this.photoChemin = photoChemin;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getPresentation() {
+        return presentation;
+    }
+
+    public void setPresentation(String presentation) {
+        this.presentation = presentation;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public Boolean getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(Boolean sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getSituation() {
+        return situation;
+    }
+
+    public void setSituation(String situation) {
+        this.situation = situation;
+    }
+
     public String getToken() {
         return token;
     }
@@ -187,19 +238,19 @@ public class User {
         this.token = token;
     }
 
-    public List<User> getAmis() {
-        return amis;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAmis(List<User> amis) {
-        this.amis = amis;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public List<Categorie> getCategories() {
-        return categories;
+    public String getVille() {
+        return ville;
     }
 
-    public void setCategories(List<Categorie> categories) {
-        this.categories = categories;
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 }

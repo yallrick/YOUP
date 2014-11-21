@@ -95,16 +95,16 @@ public class DetailsFragment extends Fragment {
         service.getEvent(this.eventID.toString(), new Callback<Evenement>() {
             @Override
             public void success(Evenement evenement, Response response) {
-                tvTitle.setText(evenement.getTitre());
+                tvTitle.setText(evenement.getTitreEvenement());
                 /* TODO: Remplir les autres champs */
                 // tvDescription.setText(evenement.getDescription());
 
                 // tvCategorie.setText("Loading...");
 
-                DateTime dateTime = new DateTime(evenement.getDate());
+                DateTime dateTime = new DateTime(evenement.getDateEvenement());
                 tvDate.setText(dateTime.getDateInFrench());
                 tvPrice.setText(evenement.getPrix() + " €");
-                tvLocation.setText(evenement.getAdresse());
+                tvLocation.setText(evenement.getAdresse().getAdresse());
                 //ImageLoader imageLoader = ImageLoader.getInstance();
                 //imageLoader.displayImage(evenement.getImage, img);
 

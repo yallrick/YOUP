@@ -1,125 +1,92 @@
 package youp.ingesup.com.youp.model.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by Vincent del Valle on 31/10/2014.
  */
 public class Evenement {
 
-    @SerializedName("Evenement_id")
-    private int id;
+    @com.google.gson.annotations.SerializedName("Adresse")
+    private Adresse adresse;
 
-    @SerializedName("LieuEvenement_id")
-    private int lieuId;
 
-    @SerializedName("Categorie_id")
-    private int categorieId;
+    @com.google.gson.annotations.SerializedName("Categorie_Libelle")
+    private String categorie_Libelle;
 
-    @SerializedName("DateEvenement")
-    private String date;
 
-    @SerializedName("TitreEvenement")
-    private String titre;
+    @com.google.gson.annotations.SerializedName("DateEvenement")
+    private String dateEvenement;
 
-    @SerializedName("MaximumParticipant")
-    private int maxPersonne;
 
-    @SerializedName("Statut")
-    private String statut;
-
-    @SerializedName("Prix")
-    private int prix;
-
-    @SerializedName("Premium")
-    private boolean premium;
-
-    @SerializedName("DateMiseEnAvant")
+    @com.google.gson.annotations.SerializedName("DateMiseEnAvant")
     private String dateMiseEnAvant;
 
-    @SerializedName("Etat_id")
-    private int etatId;
 
-    @SerializedName("EvenementPhoto_id")
-    private int photoId;
+    @com.google.gson.annotations.SerializedName("DescriptionEvenement")
+    private String descriptionEvenement;
 
-    @SerializedName("Adresse")
-    private String adresse;
 
-    public Evenement(){
+    @com.google.gson.annotations.SerializedName("Etat")
+    private String etat;
 
+
+    @com.google.gson.annotations.SerializedName("Evenement_id")
+    private Integer evenement_id;
+
+
+    @com.google.gson.annotations.SerializedName("ImageUrl")
+    private String imageUrl;
+
+
+    @com.google.gson.annotations.SerializedName("MaximumParticipant")
+    private Integer maximumParticipant;
+
+
+    @com.google.gson.annotations.SerializedName("OrganisateurImageUrl")
+    private String organisateurImageUrl;
+
+
+    @com.google.gson.annotations.SerializedName("OrganisateurPseudo")
+    private String organisateurPseudo;
+
+
+    @com.google.gson.annotations.SerializedName("Premium")
+    private Boolean premium;
+
+
+    @com.google.gson.annotations.SerializedName("Prix")
+    private Integer prix;
+
+
+    @com.google.gson.annotations.SerializedName("Statut")
+    private String statut;
+
+
+    @com.google.gson.annotations.SerializedName("TitreEvenement")
+    private String titreEvenement;
+
+
+    public Adresse getAdresse() {
+        return adresse;
     }
 
-    public int getId() {
-        return id;
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getCategorie_Libelle() {
+        return categorie_Libelle;
     }
 
-    public int getLieuId() {
-        return lieuId;
+    public void setCategorie_Libelle(String categorie_Libelle) {
+        this.categorie_Libelle = categorie_Libelle;
     }
 
-    public void setLieuId(int lieuId) {
-        this.lieuId = lieuId;
+    public String getDateEvenement() {
+        return dateEvenement;
     }
 
-    public int getCategorieId() {
-        return categorieId;
-    }
-
-    public void setCategorieId(int categorieId) {
-        this.categorieId = categorieId;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public int getMaxPersonne() {
-        return maxPersonne;
-    }
-
-    public void setMaxPersonne(int maxPersonne) {
-        this.maxPersonne = maxPersonne;
-    }
-
-    public String getStatut() {
-        return statut;
-    }
-
-    public void setStatut(String statut) {
-        this.statut = statut;
-    }
-
-    public int getPrix() {
-        return prix;
-    }
-
-    public void setPrix(int prix) {
-        this.prix = prix;
-    }
-
-    public boolean isPremium() {
-        return premium;
-    }
-
-    public void setPremium(boolean premium) {
-        this.premium = premium;
+    public void setDateEvenement(String dateEvenement) {
+        this.dateEvenement = dateEvenement;
     }
 
     public String getDateMiseEnAvant() {
@@ -130,27 +97,91 @@ public class Evenement {
         this.dateMiseEnAvant = dateMiseEnAvant;
     }
 
-    public int getEtatId() {
-        return etatId;
+    public String getDescriptionEvenement() {
+        return descriptionEvenement;
     }
 
-    public void setEtatId(int etatId) {
-        this.etatId = etatId;
+    public void setDescriptionEvenement(String descriptionEvenement) {
+        this.descriptionEvenement = descriptionEvenement;
     }
 
-    public int getPhotoId() {
-        return photoId;
+    public String getEtat() {
+        return etat;
     }
 
-    public void setPhotoId(int photoId) {
-        this.photoId = photoId;
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public Integer getEvenement_id() {
+        return evenement_id;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setEvenement_id(Integer evenement_id) {
+        this.evenement_id = evenement_id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Integer getMaximumParticipant() {
+        return maximumParticipant;
+    }
+
+    public void setMaximumParticipant(Integer maximumParticipant) {
+        this.maximumParticipant = maximumParticipant;
+    }
+
+    public String getOrganisateurImageUrl() {
+        return organisateurImageUrl;
+    }
+
+    public void setOrganisateurImageUrl(String organisateurImageUrl) {
+        this.organisateurImageUrl = organisateurImageUrl;
+    }
+
+    public String getOrganisateurPseudo() {
+        return organisateurPseudo;
+    }
+
+    public void setOrganisateurPseudo(String organisateurPseudo) {
+        this.organisateurPseudo = organisateurPseudo;
+    }
+
+    public Boolean getPremium() {
+        return premium;
+    }
+
+    public void setPremium(Boolean premium) {
+        this.premium = premium;
+    }
+
+    public Integer getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Integer prix) {
+        this.prix = prix;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public String getTitreEvenement() {
+        return titreEvenement;
+    }
+
+    public void setTitreEvenement(String titreEvenement) {
+        this.titreEvenement = titreEvenement;
     }
 }

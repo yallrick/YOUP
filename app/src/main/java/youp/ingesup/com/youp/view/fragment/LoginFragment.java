@@ -11,6 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.util.zip.GZIPInputStream;
+
 import javax.xml.datatype.Duration;
 
 import retrofit.Callback;
@@ -101,6 +110,9 @@ public class LoginFragment extends Fragment{
             service.login(username, password, "Android", new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
+
+
+
                     Auth auth = Auth.getInstance(user, user.getToken());
                     Toast.makeText(getActivity(), "Connexion réussie.", Toast.LENGTH_LONG).show();
                 }

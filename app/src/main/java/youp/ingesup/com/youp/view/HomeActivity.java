@@ -38,6 +38,7 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
     private CharSequence mTitle;
 
     private FrameLayout container;
+    private android.support.v4.app.Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,18 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
         mNavigationDrawerFragment.setUp( R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
         onNavigationDrawerItemSelected(0);
+
+
+    }
+
+
+    public void tryToUpdateTimeline(){
+        if(currentFragment != null){
+            EventFragment eventFragment = (EventFragment)currentFragment;
+            if(eventFragment != null){
+                eventFragment.loadEvents(null);
+            }
+        }
     }
 
     @Override
@@ -63,11 +76,13 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
 
         if(container != null) {
             container.removeAllViews();
-            Log.e("onNavigationDrawerItemSelected", "container is clean");
+        Log.e("onNavigationDrawerItemSelected", "container is clean");
+
+        currentFragment = PlaceholderFragment.newInstance(position + 1);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, currentFragment)
                 .commit();
         }
         else Log.e("onNavigationDrawerItemSelected", "container is null !!");

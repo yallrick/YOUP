@@ -213,7 +213,6 @@ public class DetailsFragment extends Fragment {
         // ENVOYER VERS INTENT DE PROFIL
         Integer id_organizer = evenement.getOrganisateurId();
 
-
         try{
             ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(id_organizer));
         }catch(Exception ex)

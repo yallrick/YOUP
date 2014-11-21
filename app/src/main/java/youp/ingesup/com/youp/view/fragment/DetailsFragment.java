@@ -155,6 +155,11 @@ public class DetailsFragment extends Fragment {
                 if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
                     ImageLoader imageLoader = ImageLoader.getInstance();
                     imageLoader.displayImage(evenement.getImageUrl(), img);
+                }else{
+                    if(evenement.getOrganisateurImageUrl() != null && !evenement.getOrganisateurImageUrl().isEmpty()) {
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        imageLoader.displayImage(evenement.getOrganisateurImageUrl(), img);
+                    }
                 }
 
 

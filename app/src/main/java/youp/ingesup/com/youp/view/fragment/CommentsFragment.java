@@ -32,6 +32,7 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Message;
 import youp.ingesup.com.youp.model.services.ForumService;
 import youp.ingesup.com.youp.view.EventActivity;
+import youp.ingesup.com.youp.view.LoginActivity;
 import youp.ingesup.com.youp.view.adapter.CommentAdapter;
 
 /**
@@ -59,7 +60,7 @@ public class CommentsFragment  extends Fragment {
 
         /* Récupérer les informations de l'event : Indent + Appel API */
         eventID = ((EventActivity)getActivity()).eventID;
-        topicID = 77;
+        topicID = 1;
 
         final EditText etComments = (EditText)viewRoot.findViewById(R.id.etComments);
         loadComment = (ProgressBar)viewRoot.findViewById(R.id.loadComment);
@@ -75,6 +76,10 @@ public class CommentsFragment  extends Fragment {
                 //
                 if(!Auth.isLoggedIn()){
                     Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+
                     return;
                 }
                 /**/

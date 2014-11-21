@@ -82,7 +82,7 @@ public class MyAccountProfileFragment extends Fragment {
         tvVille = (TextView) root.findViewById(R.id.tvCity);
         tvMetier = (TextView) root.findViewById(R.id.tvMetier);
         tvDateInscription  = (TextView) root.findViewById(R.id.tvDateInscription);
-        tvMail = (TextView) root.findViewById(R.id.tvMetier);
+        tvMail = (TextView) root.findViewById(R.id.tvEmailProfile);
         tvDescription = (TextView) root.findViewById(R.id.tvPresentationProfile);
         imgProfil = (ImageView) root.findViewById(R.id.imgProfile);
         buttonBecomeFriend = (Button) root.findViewById(R.id.btDevenirAmi);

@@ -1,12 +1,10 @@
-package youp.ingesup.com.youp.view;
+package youp.ingesup.com.youp.view.fragment;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +12,6 @@ import android.view.ViewGroup;
 
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.adapter.MyAccountAdapter;
-import youp.ingesup.com.youp.adapter.TabsEventAdapter;
-import youp.ingesup.com.youp.view.fragment.CommentsFragment;
-import youp.ingesup.com.youp.view.fragment.DetailsFragment;
-import youp.ingesup.com.youp.view.fragment.MyAccountEventsFragment;
-import youp.ingesup.com.youp.view.fragment.MyAccountFriendsFragment;
-import youp.ingesup.com.youp.view.fragment.MyAccountProfileFragment;
-
-import static android.app.ActionBar.TabListener;
 
 
 /**
@@ -62,7 +52,6 @@ public class MainAccountFragment extends Fragment implements
         actionBar = getActivity().getActionBar();
         mAdapter = new MyAccountAdapter(getActivity().getSupportFragmentManager());
 
-
         actionBar.removeAllTabs();
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
@@ -86,7 +75,7 @@ public class MainAccountFragment extends Fragment implements
             public void onPageSelected(int position) {
                 // on changing the page
                 // make respected tab selected
-                //actionBar.setSelectedNavigationItem(position);
+                actionBar.setSelectedNavigationItem(position);
             }
 
             @Override
@@ -103,7 +92,6 @@ public class MainAccountFragment extends Fragment implements
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-
         viewPager.setCurrentItem(tab.getPosition());
     }
 

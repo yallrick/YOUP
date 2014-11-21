@@ -27,7 +27,6 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.view.HomeActivity;
-import youp.ingesup.com.youp.view.MainAccountFragment;
 
 /**
  * Created by Damiano on 14/11/2014.
@@ -90,7 +89,8 @@ public class DetailsFragment extends Fragment {
         btShare.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 if(getActivity() == null || evenement == null)
                     return;
@@ -162,7 +162,6 @@ public class DetailsFragment extends Fragment {
 
 
                 tvDescription.setText(evenement.getDescriptionEvenement());
-
                 btOrganizer.setText(evenement.getOrganisateurPseudo());
 
             }

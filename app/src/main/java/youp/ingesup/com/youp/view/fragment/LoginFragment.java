@@ -109,8 +109,10 @@ public class LoginFragment extends Fragment{
                 @Override
                 public void success(User user, Response response) {
 
-                    Auth auth = Auth.getInstance(user, user.getToken());
+                    if(user == null)
+                        return;
 
+                    Auth auth = Auth.getInstance(user, user.getToken());
                     Toast.makeText(getActivity(), "Vous êtes maintenant connecté.", Toast.LENGTH_LONG).show();
 
 

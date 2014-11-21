@@ -87,7 +87,8 @@ public interface EventService {
 
     @POST("/api/Evenement?idEvenement={idEvenement}&idProfil={idProfil}")
     void joinEvent(@Path("idEvenement") String idEvent,
-                   @Path("idProfil") String idProfile);
+                   @Path("idProfil") String idProfile,
+                   Callback<Boolean> callback);
 
     @DELETE("/api/Evenement/{id}?id_profil={id_profil}")
     void destroyEvent(@Path("id") String id,

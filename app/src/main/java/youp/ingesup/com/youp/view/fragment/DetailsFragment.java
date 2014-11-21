@@ -198,10 +198,36 @@ public class DetailsFragment extends Fragment {
 
     private void Subscription()
     {
+
+        if(!Auth.isLoggedIn()){
+            Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(this.evenement == null || this.evenement.getEvenement_id() == null || Auth.getInstance() == null || Auth.getInstance().getUser() == null || Auth.getInstance().getUser().getId() == null)
+            return;
+
         if(Auth.isLoggedIn()) {
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
             EventService service = restAdapter.create(EventService.class);
-            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString());
+            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString(), new Callback<Boolean>() {
+                @Override
+                public void success(Boolean aBoolean, Response response) {
+                    if(getActivity() == null)
+                        return;
+
+                    if(aBoolean){
+                        Toast.makeText(getActivity(), "Registration confirmed.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getActivity(), "Registration failed.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void failure(RetrofitError error) {
+                    if(getActivity() != null)
+                        Toast.makeText(getActivity(), "Registration failed.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
         }

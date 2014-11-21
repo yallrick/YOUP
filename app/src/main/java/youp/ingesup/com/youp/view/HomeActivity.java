@@ -79,7 +79,12 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
 
     public void tryToUpdateTimeline(){
         if(currentFragment != null){
-            EventFragment eventFragment = (EventFragment)currentFragment;
+            EventFragment eventFragment = null;
+
+            try {
+                eventFragment = (EventFragment) currentFragment;
+            }catch (Exception ex){ Log.e("HomeActivity", "Impossible de rafrachir la timeline"); }
+
             if(eventFragment != null){
                 eventFragment.loadEvents(null);
             }

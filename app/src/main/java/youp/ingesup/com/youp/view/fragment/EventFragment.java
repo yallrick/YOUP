@@ -62,8 +62,10 @@ public class EventFragment extends Fragment {
 
         ActionBar actionBar = getActivity().getActionBar();
 
-        actionBar.removeAllTabs();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        if(actionBar != null) {
+            actionBar.removeAllTabs();
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        }
 
 
         bottomView = new ProgressBar(getActivity());

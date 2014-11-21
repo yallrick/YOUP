@@ -58,7 +58,7 @@ public class MyAccountFriendsFragment extends Fragment {
         View viewRoot = inflater.inflate(R.layout.fragment_my_account_friends, container, false);
 
         Integer profile_id = ((MyAccountActivity)getActivity()).profileID;
-        if(profile_id == 0 )
+        if(profile_id == 0 && Auth.getInstance().getUser() != null)
             profile_id = Auth.getInstance().getUser().getId();
 
         listView = (ListView)viewRoot.findViewById(R.id.listViewFriends);

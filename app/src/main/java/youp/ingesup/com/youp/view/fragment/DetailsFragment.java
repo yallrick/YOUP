@@ -212,12 +212,12 @@ public class DetailsFragment extends Fragment {
     private void OpenOrganizer()
     {
         // ENVOYER VERS INTENT DE PROFIL
-        Integer id_organizer = 1;
+        Integer id_organizer = evenement.getOrganisateurId();
+
 
         try{
             Intent intent = new Intent(getActivity(), MyAccountActivity.class);
             intent.putExtra(MyAccountActivity.PARAM_ID_PROFILE, id_organizer);
-            //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
             startActivity(intent);
         }catch(Exception ex)
         {

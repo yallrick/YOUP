@@ -62,6 +62,7 @@ public class EventFragment extends Fragment {
         });
 
         listView = (ListView)viewRoot.findViewById(R.id.list);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

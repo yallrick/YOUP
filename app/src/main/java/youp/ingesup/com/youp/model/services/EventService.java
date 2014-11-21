@@ -11,6 +11,7 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import youp.ingesup.com.youp.model.bean.Categorie;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.bean.Location;
@@ -65,8 +66,8 @@ public interface EventService {
     void getEvents(Callback<List<Evenement>> callback);
 
 
-    @GET("/api/Evenement?id_profil={id_profil}")
-    void getEvents(@Path("id_profil") String idProfile,
+    @GET("/api/Evenement")
+    void getEvents(@Query("id_profil") String idProfile,
                      Callback<List<Evenement>> callback);
 
 

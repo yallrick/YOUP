@@ -25,14 +25,13 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.MyAccountActivity;
+import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
 /**
  * Created by Vincent del Valle on 14/11/2014.
  */
 public class MyAccountProfileFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
 
     private UserService userService;
     private User user;
@@ -66,7 +65,7 @@ public class MyAccountProfileFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_my_account_profile, container, false);
 
-        Integer profile_id = ((MyAccountActivity)getActivity()).profileID;
+        Integer profile_id = MainAccountFragment.profileID;
         if(profile_id == 0 && Auth.getInstance().getUser() != null)
             profile_id = Auth.getInstance().getUser().getId();
 
@@ -102,24 +101,6 @@ public class MyAccountProfileFragment extends Fragment {
         ChargementDonnees();
 
         return root;
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     public interface OnFragmentInteractionListener {

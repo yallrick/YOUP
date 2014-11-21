@@ -1,6 +1,7 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
 import youp.ingesup.com.youp.tool.FieldValidator;
+import youp.ingesup.com.youp.view.HomeActivity;
 
 public class LoginFragment extends Fragment{
     private SignUpFragment.OnFragmentInteractionListener mListener;
@@ -107,18 +109,13 @@ public class LoginFragment extends Fragment{
                 @Override
                 public void success(User user, Response response) {
 
-
-
-
                     Auth auth = Auth.getInstance(user, user.getToken());
 
-                    if(getActivity() != null) {
-                        Toast.makeText(getActivity(), "Connexion réussie. (" + user.getId() + ")", Toast.LENGTH_LONG).show();
-                        getActivity().finish();
-                    }
+                    Toast.makeText(getActivity(), "Vous êtes maintenant connecté.", Toast.LENGTH_LONG).show();
 
 
-
+                    Intent refresh = new Intent(getActivity(), HomeActivity.class);
+                    getActivity().startActivity(refresh);
                 }
 
                 @Override

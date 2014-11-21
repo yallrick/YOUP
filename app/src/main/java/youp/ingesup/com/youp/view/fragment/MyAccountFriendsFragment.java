@@ -1,22 +1,14 @@
 package youp.ingesup.com.youp.view.fragment;
 
 
-import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,23 +21,15 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
-import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.bean.Friend;
-import youp.ingesup.com.youp.model.bean.Message;
-import youp.ingesup.com.youp.model.bean.User;
-import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.model.services.ForumService;
 import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.MyAccountActivity;
-import youp.ingesup.com.youp.view.adapter.CommentAdapter;
-import youp.ingesup.com.youp.view.adapter.EventAdapter;
+import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
 /**
  * Created by Vincent del Valle on 14/11/2014.
  */
 public class MyAccountFriendsFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
 
     private List<Friend> friends;
     private ListView listView;
@@ -56,7 +40,7 @@ public class MyAccountFriendsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_my_account_friends, container, false);
 
-        Integer profile_id = ((MyAccountActivity)getActivity()).profileID;
+        Integer profile_id = MainAccountFragment.profileID;
         if(profile_id == 0 && Auth.getInstance().getUser() != null)
             profile_id = Auth.getInstance().getUser().getId();
 

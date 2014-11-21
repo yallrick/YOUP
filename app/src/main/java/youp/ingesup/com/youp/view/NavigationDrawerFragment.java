@@ -227,8 +227,7 @@ public class NavigationDrawerFragment extends Fragment {
             switch (position){
                 case 1: // My Account
 
-                    Intent intentMyAccount = new Intent(getActivity(), MyAccountActivity.class);
-                    startActivity(intentMyAccount);
+                    ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(Auth.getInstance().getUser().getId()));
 
                     return;
                 case 2: // Déconnexion
@@ -292,7 +291,10 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+
+            // TODO reload timeline
+            ((HomeActivity)getActivity()).tryToUpdateTimeline();
+
             return true;
         }
 

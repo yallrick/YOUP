@@ -47,7 +47,7 @@ public class MyAccountFriendsAdapter extends ArrayAdapter<Friend> {
         final Friend currentItem = friends.get(position);
 
         ImageView imgFriend = (ImageView)convertView.findViewById(R.id.imgFriend);
-        TextView tvPseudo = (TextView)convertView.findViewById(R.id.date);
+        TextView tvPseudo = (TextView)convertView.findViewById(R.id.tvPseudoFriend);
 
         // image
         String imageURL = currentItem.getUrlPhoto();

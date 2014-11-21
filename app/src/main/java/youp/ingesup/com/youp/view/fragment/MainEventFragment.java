@@ -52,6 +52,8 @@ public class MainEventFragment extends Fragment implements TabListener {
         actionBar = getActivity().getActionBar();
         mAdapter = new TabsEventAdapter(getActivity().getSupportFragmentManager());
 
+
+        actionBar.removeAllTabs();
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

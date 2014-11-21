@@ -1,6 +1,5 @@
 package youp.ingesup.com.youp.view.fragment;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,20 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
-import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.MainAccountFragment;
-import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
 /**
  * Created by Vincent del Valle on 14/11/2014.

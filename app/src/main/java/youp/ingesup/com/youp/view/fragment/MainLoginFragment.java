@@ -50,6 +50,7 @@ public class MainLoginFragment extends Fragment implements
         actionBar = getActivity().getActionBar();
         mAdapter = new TabsLoginSignUpAdapter(getActivity().getSupportFragmentManager());
 
+        actionBar.removeAllTabs();
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -57,7 +58,6 @@ public class MainLoginFragment extends Fragment implements
         viewPager.setCurrentItem(0);
 
         // Adding Tab
-        actionBar.removeAllTabs();
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
         }
@@ -73,7 +73,7 @@ public class MainLoginFragment extends Fragment implements
             public void onPageSelected(int position) {
                 // on changing the page
                 // make respected tab selected
-                //actionBar.setSelectedNavigationItem(position);
+                actionBar.setSelectedNavigationItem(position);
             }
 
             @Override

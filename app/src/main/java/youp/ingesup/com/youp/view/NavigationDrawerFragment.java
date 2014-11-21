@@ -4,7 +4,6 @@ package youp.ingesup.com.youp.view;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,10 +21,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
+import youp.ingesup.com.youp.view.fragment.MainAccountFragment;
 import youp.ingesup.com.youp.view.fragment.MainLoginFragment;
 
 /**
@@ -163,7 +162,7 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                //getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
 
             @Override
@@ -173,7 +172,7 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                //getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
 

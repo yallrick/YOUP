@@ -26,7 +26,6 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.services.UserService;
 import youp.ingesup.com.youp.view.HomeActivity;
-import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
 /**

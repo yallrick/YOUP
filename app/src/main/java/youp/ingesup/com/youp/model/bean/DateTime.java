@@ -21,7 +21,7 @@ public class DateTime {
 
     // doc : http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html#rfc822timezone
     public final static String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-    private static final Pattern PATTERN_DATETIME = Pattern.compile("([0-9]{4})\\-([0-9]{2})\\-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})");
+    private static final Pattern PATTERN_DATETIME = Pattern.compile("([0-9]{4})\\-([0-9]{2})\\-([0-9]{2})(T| )([0-9]{2}):([0-9]{2}):([0-9]{2})(.123)?");
     private static final Pattern PATTERN_DATE_ymd = Pattern.compile("([0-9]{4})\\-([0-9]{2})\\-([0-9]{2})");
     private static final Pattern PATTERN_DATE_dmy = Pattern.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})");
 
@@ -161,9 +161,9 @@ public class DateTime {
             year = Integer.valueOf(m.group(1));
             month = Integer.valueOf(m.group(2));
             day = Integer.valueOf(m.group(3));
-            hours = Integer.valueOf(m.group(4));
-            minutes = Integer.valueOf(m.group(5));
-            seconds = Integer.valueOf(m.group(6));
+            hours = Integer.valueOf(m.group(5));
+            minutes = Integer.valueOf(m.group(6));
+            seconds = Integer.valueOf(m.group(7));
 
             isDateOnly = (hours == 0 && minutes == 0 && seconds == 0);
 
@@ -196,13 +196,13 @@ public class DateTime {
                 ((month <= 9) ? "0" : "") + month
                 + "-" +
                 ((day <= 9) ? "0" : "") + day
-                + "T" +
+                + " " +
                 ((hours <= 9) ? "0" : "") + hours
                 + ":" +
                 ((minutes <= 9) ? "0" : "") + minutes
                 + ":" +
                 ((seconds <= 9) ? "0" : "") + seconds
-                + "+0000";
+                + ".123";
     }
 
     /**

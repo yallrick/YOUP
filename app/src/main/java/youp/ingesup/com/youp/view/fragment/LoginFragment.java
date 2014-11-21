@@ -109,8 +109,16 @@ public class LoginFragment extends Fragment{
 
 
 
+
                     Auth auth = Auth.getInstance(user, user.getToken());
-                    Toast.makeText(getActivity(), "Connexion réussie.", Toast.LENGTH_LONG).show();
+
+                    if(getActivity() != null) {
+                        Toast.makeText(getActivity(), "Connexion réussie. (" + user.getId() + ")", Toast.LENGTH_LONG).show();
+                        getActivity().finish();
+                    }
+
+
+
                 }
 
                 @Override

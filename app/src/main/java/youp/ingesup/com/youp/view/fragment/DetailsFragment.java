@@ -1,9 +1,14 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -21,6 +28,7 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
+import youp.ingesup.com.youp.view.MyAccountActivity;
 
 /**
  * Created by Damiano on 14/11/2014.
@@ -39,6 +47,7 @@ public class DetailsFragment extends Fragment {
     private Button btOrganizer;
 
     private Integer eventID;
+    private Evenement evenement;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +77,7 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                /* TODO: Renvoyer vers le profil de l'organisateur */
+                OpenOrganizer();
             }
         });
         btSubscribe.setOnClickListener(new View.OnClickListener() {
@@ -83,30 +92,76 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                /* TODO: Partager l'événement */
+
+                if(getActivity() == null || evenement == null)
+                    return;
+
+                try {
+                    String adUrl = "";
+
+                    adUrl += "<h1>"+evenement.getTitreEvenement()+"</h1>";
+                    adUrl += "<p>"+ evenement.getDescriptionEvenement() +"</p>";
+                    adUrl += "<p><a href=\"#\">See more</a></p>";
+
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("message/rfc822");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Event YOUP");
+                    intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(adUrl));
+
+                    getActivity().startActivity(Intent.createChooser(intent, "Email :"));
+                }catch (ActivityNotFoundException e){
+                    Toast.makeText(getActivity(), "Fail to share by email.", Toast.LENGTH_LONG).show();
+                }catch (Exception ignored){}
+
             }
         });
 
         /* Récupérer les informations de l'event : Indent + Appel API */
         this.eventID = MainEventFragment.eventID;
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService service = restAdapter.create(EventService.class);
-        service.getEvent(this.eventID.toString(), new Callback<Evenement>() {
+        service.getEvent(eventID.toString(), new Callback<Evenement>() {
             @Override
-            public void success(Evenement evenement, Response response) {
-                tvTitle.setText(evenement.getTitreEvenement());
-                /* TODO: Remplir les autres champs */
-                // tvDescription.setText(evenement.getDescription());
+            public void success(Evenement event, Response response) {
 
-                // tvCategorie.setText("Loading...");
+                evenement = event;
+
+                tvTitle.setText(evenement.getTitreEvenement());
 
                 DateTime dateTime = new DateTime(evenement.getDateEvenement());
                 tvDate.setText(dateTime.getDateInFrench());
-                tvPrice.setText(evenement.getPrix() + " €");
-                tvLocation.setText(evenement.getAdresse().getAdresse());
-                //ImageLoader imageLoader = ImageLoader.getInstance();
-                //imageLoader.displayImage(evenement.getImage, img);
+
+
+                if(evenement.getPrix() != null)
+                    tvPrice.setText(evenement.getPrix() + " €");
+                else
+                    tvPrice.setText("- €");
+
+                if(evenement.getAdresse() != null)
+                    tvLocation.setText(evenement.getAdresse().getAdresse());
+                else
+                    tvLocation.setText("-");
+
+                if(evenement.getCategorie_Libelle() != null && !evenement.getCategorie_Libelle().isEmpty())
+                    tvCategorie.setText(evenement.getCategorie_Libelle());
+                else
+                    tvCategorie.setText("-");
+
+                if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
+                    ImageLoader imageLoader = ImageLoader.getInstance();
+                    imageLoader.displayImage(evenement.getImageUrl(), img);
+                }else{
+                    if(evenement.getOrganisateurImageUrl() != null && !evenement.getOrganisateurImageUrl().isEmpty()) {
+                        ImageLoader imageLoader = ImageLoader.getInstance();
+                        imageLoader.displayImage(evenement.getOrganisateurImageUrl(), img);
+                    }
+                }
+
+
+                tvDescription.setText(evenement.getDescriptionEvenement());
+
+                btOrganizer.setText(evenement.getOrganisateurPseudo());
 
             }
 
@@ -115,7 +170,7 @@ public class DetailsFragment extends Fragment {
                 Activity context = getActivity();
 
                 if(context != null)
-                    Toast.makeText(context, "Connexion échouée.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Fail to find event's details.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -142,9 +197,30 @@ public class DetailsFragment extends Fragment {
 
     private void Subscription()
     {
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
-        EventService service = restAdapter.create(EventService.class);
-        service.joinEvent(this.eventID.toString(),Auth.getInstance().getUser().getId().toString());
+        if(Auth.isLoggedIn()) {
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+            EventService service = restAdapter.create(EventService.class);
+            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString());
+        }else{
+            Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void OpenOrganizer()
+    {
+        // ENVOYER VERS INTENT DE PROFIL
+        Integer id_organizer = 1;
+
+        try{
+            Intent intent = new Intent(getActivity(), MyAccountActivity.class);
+            intent.putExtra(MyAccountActivity.PARAM_ID_PROFILE, id_organizer);
+            //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
+            startActivity(intent);
+        }catch(Exception ex)
+        {
+            Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
+        }
+
     }
 
 }

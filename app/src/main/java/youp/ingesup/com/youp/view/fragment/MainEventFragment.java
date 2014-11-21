@@ -27,6 +27,7 @@ public class MainEventFragment extends Fragment implements TabListener {
     public static final String PARAM_ID_EVENT = "PARAM_ID_EVENT";
 
     public static Integer eventID;
+    public Integer profileID;
 
     // Tab titles
     private String[] tabs = { "Details", "Comments"};

@@ -20,6 +20,7 @@
             android:id="@+id/etComments" />
 
         <Button
+            android:id="@+id/btnSendComment"
             android:background="@drawable/rounded_clickable_white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,10 +29,23 @@
 
         </LinearLayout>
 
+        <ProgressBar
+
+            android:id="@+id/loadComment"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:id="@+id/listComments"/>
+            android:id="@+id/listComments"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:visibility="gone"/>
 
 </LinearLayout>

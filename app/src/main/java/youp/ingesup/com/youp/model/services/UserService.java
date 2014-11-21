@@ -16,7 +16,7 @@ import youp.ingesup.com.youp.model.bean.User;
 public interface UserService {
 
     @GET("/api/User/{id}")
-    String getUser(@Path("id") String id, Callback<User> callback);
+    void getUser(@Path("id") String id, Callback<User> callback);
 
     @POST("/api/Auth")
     void login(@Query("Email") String username,

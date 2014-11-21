@@ -3,6 +3,7 @@
   <component name="HistoryComponent">
     <option name="urls">
       <array>
+        <option value="http://youp-evenementapi.azurewebsites.net/" />
         <option value="http://aspmoduleprofil.azurewebsites.net/api/auth" />
         <option value="http://youp-evenementapi.azurewebsites.net/api/Evenement?date_search=%7Bdate_search%7D&amp;id_Categorie=%7Bid_Categorie%7D&amp;prenium=%7Bprenium%7D&amp;max_result=%7Bmax_result%7D&amp;max_id=%7Bmax_id%7D&amp;text_search=%7Btext_search%7D&amp;orderby=%7Borderby%7D&amp;startRange=%7BstartRange%7D&amp;endRange=%7BendRange%7D" />
       </array>

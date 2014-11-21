@@ -1,10 +1,13 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +50,8 @@ public class DetailsFragment extends Fragment {
 
     private Button btOrganizer;
 
-    private Evenement event;
+    private Integer eventID;
+    private Evenement evenement;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +96,27 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                /* TODO: Partager l'événement */
+
+                if(getActivity() == null || evenement == null)
+                    return;
+
+                try {
+                    String adUrl = "";
+
+                    adUrl += "<h1>"+evenement.getTitreEvenement()+"</h1>";
+                    adUrl += "<p>"+ evenement.getDescriptionEvenement() +"</p>";
+                    adUrl += "<p><a href=\"#\">See more</a></p>";
+
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("message/rfc822");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Event YOUP");
+                    intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(adUrl));
+
+                    getActivity().startActivity(Intent.createChooser(intent, "Email :"));
+                }catch (ActivityNotFoundException e){
+                    Toast.makeText(getActivity(), "Fail to share by email.", Toast.LENGTH_LONG).show();
+                }catch (Exception ignored){}
+
             }
         });
 
@@ -103,9 +127,9 @@ public class DetailsFragment extends Fragment {
         EventService service = restAdapter.create(EventService.class);
         service.getEvent(eventID.toString(), new Callback<Evenement>() {
             @Override
-            public void success(Evenement evenement, Response response) {
+            public void success(Evenement event, Response response) {
 
-                event = evenement;
+                evenement = event;
 
                 tvTitle.setText(evenement.getTitreEvenement());
 
@@ -130,8 +154,9 @@ public class DetailsFragment extends Fragment {
 
                 if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
                     ImageLoader imageLoader = ImageLoader.getInstance();
-                    imageLoader.displayImage(evenement.getOrganisateurImageUrl(), img);
+                    imageLoader.displayImage(evenement.getImageUrl(), img);
                 }
+
 
                 tvDescription.setText(evenement.getDescriptionEvenement());
 
@@ -178,7 +203,7 @@ public class DetailsFragment extends Fragment {
         if(Auth.isLoggedIn()) {
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
             EventService service = restAdapter.create(EventService.class);
-            service.joinEvent(this.event.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString());
+            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString());
         }else{
             Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
         }

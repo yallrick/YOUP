@@ -1,9 +1,67 @@
 package youp.ingesup.com.youp.model.bean;
 
+import java.util.List;
+
 /**
  * Created by Vincent del Valle on 31/10/2014.
  */
 public class Evenement {
+
+
+    @com.google.gson.annotations.SerializedName("Categorie")
+    private Categorie categorie;
+
+
+    @com.google.gson.annotations.SerializedName("CreateDate")
+    private String createDate;
+
+
+    @com.google.gson.annotations.SerializedName("DateFinInscription")
+    private String dateFinInscription;
+
+    @com.google.gson.annotations.SerializedName("DateModification")
+    private String dateModification;
+
+    @com.google.gson.annotations.SerializedName("EtatEvenement")
+    private EtatEvenement etatEvenement;
+
+
+    @com.google.gson.annotations.SerializedName("EventAdresse")
+    private Adresse eventAdresse;
+
+
+    @com.google.gson.annotations.SerializedName("Galleries")
+    private List<Gallery> galleries;
+
+
+    @com.google.gson.annotations.SerializedName("HashTag")
+    private List<java.lang.String> hashTag;
+
+
+    @com.google.gson.annotations.SerializedName("Id")
+    private Integer id;
+
+
+    @com.google.gson.annotations.SerializedName("MinimumParticipant")
+    private Integer minimumParticipant;
+
+
+    @com.google.gson.annotations.SerializedName("OrganisateurId")
+    private Integer organisateurId;
+
+    @com.google.gson.annotations.SerializedName("Payant")
+    private Boolean payant;
+
+
+    @com.google.gson.annotations.SerializedName("Price")
+    private Double price;
+
+
+
+    @com.google.gson.annotations.SerializedName("Public")
+    private Boolean thePublic;
+
+
 
     @com.google.gson.annotations.SerializedName("Adresse")
     private Adresse adresse;
@@ -183,5 +241,118 @@ public class Evenement {
 
     public void setTitreEvenement(String titreEvenement) {
         this.titreEvenement = titreEvenement;
+    }
+
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getDateFinInscription() {
+        return dateFinInscription;
+    }
+
+    public void setDateFinInscription(String dateFinInscription) {
+        this.dateFinInscription = dateFinInscription;
+    }
+
+    public String getDateModification() {
+        return dateModification;
+    }
+
+    public void setDateModification(String dateModification) {
+        this.dateModification = dateModification;
+    }
+
+    public EtatEvenement getEtatEvenement() {
+        return etatEvenement;
+    }
+
+    public void setEtatEvenement(EtatEvenement etatEvenement) {
+        this.etatEvenement = etatEvenement;
+    }
+
+    public Adresse getEventAdresse() {
+        return eventAdresse;
+    }
+
+    public void setEventAdresse(Adresse eventAdresse) {
+        this.eventAdresse = eventAdresse;
+    }
+
+    public List<Gallery> getGalleries() {
+        return galleries;
+    }
+
+    public void setGalleries(List<Gallery> galleries) {
+        this.galleries = galleries;
+    }
+
+    public List<String> getHashTag() {
+        return hashTag;
+    }
+
+    public void setHashTag(List<String> hashTag) {
+        this.hashTag = hashTag;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getMinimumParticipant() {
+        return minimumParticipant;
+    }
+
+    public void setMinimumParticipant(Integer minimumParticipant) {
+        this.minimumParticipant = minimumParticipant;
+    }
+
+    public Integer getOrganisateurId() {
+        return organisateurId;
+    }
+
+    public void setOrganisateurId(Integer organisateurId) {
+        this.organisateurId = organisateurId;
+    }
+
+    public Boolean getPayant() {
+        return payant;
+    }
+
+    public void setPayant(Boolean payant) {
+        this.payant = payant;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Boolean getThePublic() {
+        return thePublic;
+    }
+
+    public void setThePublic(Boolean thePublic) {
+        this.thePublic = thePublic;
     }
 }

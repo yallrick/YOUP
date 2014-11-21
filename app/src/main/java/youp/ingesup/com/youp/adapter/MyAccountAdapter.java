@@ -12,9 +12,16 @@ import youp.ingesup.com.youp.view.fragment.*;
  */
 public class MyAccountAdapter extends FragmentStatePagerAdapter {
 
+    private MyAccountFriendsFragment myAccountFriendsFragment;
+    private MyAccountEventsFragment myAccountEventsFragment;
+    private MyAccountProfileFragment myAccountProfileFragment;
 
     public MyAccountAdapter(FragmentManager fm) {
         super(fm);
+
+        myAccountFriendsFragment = new MyAccountFriendsFragment();
+        myAccountEventsFragment = new MyAccountEventsFragment();
+        myAccountProfileFragment = new MyAccountProfileFragment();
     }
 
     @Override
@@ -22,11 +29,11 @@ public class MyAccountAdapter extends FragmentStatePagerAdapter {
 
         switch (i){
             case 0:
-                return new MyAccountFriendsFragment();
+                return myAccountFriendsFragment;
             case 1:
-                return new MyAccountEventsFragment();
+                return myAccountEventsFragment;
             case 2:
-                return new MyAccountProfileFragment();
+                return myAccountProfileFragment;
         }
 
         return null;

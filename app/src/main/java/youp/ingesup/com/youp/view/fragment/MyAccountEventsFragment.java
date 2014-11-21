@@ -1,7 +1,6 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,7 +22,6 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.view.HomeActivity;
-import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
 /**
@@ -56,6 +54,9 @@ public class MyAccountEventsFragment extends Fragment {
         serviceEvent.getEvents(profile_id.toString(),new Callback<List<Evenement>>() {
             @Override
             public void success(List<Evenement> evenements, Response response) {
+                if(evenements == null)
+                    return;
+
                 events = evenements;
 
                 EventAdapter adapter = new EventAdapter(getActivity(), R.layout.item_event, events);

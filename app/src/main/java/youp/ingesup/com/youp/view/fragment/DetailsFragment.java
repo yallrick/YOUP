@@ -27,7 +27,6 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.view.HomeActivity;
-import youp.ingesup.com.youp.view.MainAccountFragment;
 
 /**
  * Created by Damiano on 14/11/2014.

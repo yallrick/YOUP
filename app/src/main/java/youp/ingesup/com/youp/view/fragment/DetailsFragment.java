@@ -1,9 +1,11 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.model.services.UserService;
 import youp.ingesup.com.youp.view.EventActivity;
+import youp.ingesup.com.youp.view.MyAccountActivity;
 
 /**
  * Created by Damiano on 14/11/2014.
@@ -44,7 +47,7 @@ public class DetailsFragment extends Fragment {
 
     private Button btOrganizer;
 
-    private Integer eventID;
+    private Evenement event;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                /* TODO: Renvoyer vers le profil de l'organisateur */
+                OpenOrganizer();
             }
         });
         btSubscribe.setOnClickListener(new View.OnClickListener() {
@@ -94,14 +97,15 @@ public class DetailsFragment extends Fragment {
         });
 
         /* Récupérer les informations de l'event : Indent + Appel API */
-        this.eventID = ((EventActivity)getActivity()).eventID;
+         Integer eventID = ((EventActivity)getActivity()).eventID;
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService service = restAdapter.create(EventService.class);
-        service.getEvent(this.eventID.toString(), new Callback<Evenement>() {
+        service.getEvent(eventID.toString(), new Callback<Evenement>() {
             @Override
             public void success(Evenement evenement, Response response) {
 
+                event = evenement;
 
                 tvTitle.setText(evenement.getTitreEvenement());
 
@@ -126,11 +130,12 @@ public class DetailsFragment extends Fragment {
 
                 if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
                     ImageLoader imageLoader = ImageLoader.getInstance();
-                    imageLoader.displayImage(evenement.getImageUrl(), img);
+                    imageLoader.displayImage(evenement.getOrganisateurImageUrl(), img);
                 }
 
-
                 tvDescription.setText(evenement.getDescriptionEvenement());
+
+                btOrganizer.setText(evenement.getOrganisateurPseudo());
 
             }
 
@@ -173,10 +178,27 @@ public class DetailsFragment extends Fragment {
         if(Auth.isLoggedIn()) {
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
             EventService service = restAdapter.create(EventService.class);
-            service.joinEvent(this.eventID.toString(), Auth.getInstance().getUser().getId().toString());
+            service.joinEvent(this.event.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString());
         }else{
             Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void OpenOrganizer()
+    {
+        // ENVOYER VERS INTENT DE PROFIL
+        Integer id_organizer = 1;
+
+        try{
+            Intent intent = new Intent(getActivity(), MyAccountActivity.class);
+            intent.putExtra(MyAccountActivity.PARAM_ID_PROFILE, id_organizer);
+            //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
+            startActivity(intent);
+        }catch(Exception ex)
+        {
+            Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
+        }
+
     }
 
 }

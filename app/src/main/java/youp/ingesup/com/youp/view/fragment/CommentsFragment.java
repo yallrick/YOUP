@@ -74,7 +74,7 @@ public class CommentsFragment  extends Fragment {
                 if(!Auth.isLoggedIn()){
                     Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
 
-                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false));
+                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false), "login");
 
                     return;
                 }

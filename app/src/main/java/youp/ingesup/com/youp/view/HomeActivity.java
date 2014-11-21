@@ -66,8 +66,13 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
     @Override
     public void onBackPressed()
     {
-        if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
-        else Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+
+        // TODO fragment go back in stack
+        super.onBackPressed();
+
+
+        //if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
+        //else Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
         back_pressed = System.currentTimeMillis();
     }
 
@@ -87,25 +92,47 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
 
         if(container != null) {
             container.removeAllViews();
-        Log.e("onNavigationDrawerItemSelected", "container is clean");
+            Log.e("onNavigationDrawerItemSelected", "container is clean");
 
-        currentFragment = PlaceholderFragment.newInstance(position + 1);
+            currentFragment = PlaceholderFragment.newInstance(position + 1);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, currentFragment)
-                .commit();
+            String tag = String.valueOf(position);
+
+            goToFragment(currentFragment, tag);
+
+            /*
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, currentFragment, tag)
+                    .addToBackStack(tag)
+                    .commit();
+
+            /**/
+
+
+
         }
         else Log.e("onNavigationDrawerItemSelected", "container is null !!");
 
         Log.e("HomeActivity", "onNavigationDrawerItemSelected() -> " + position);
     }
 
-    public void goToFragment(Fragment fragment){
+    public void goToFragment(final Fragment fragment, String tag){
+
+        currentFragment = fragment;
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, fragment, tag)
+                .addToBackStack(tag)
                 .commit();
+
+        getSupportFragmentManager().addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        Log.e("HomeActivity", "onBackStackChanged() currentFragment : " + fragment.getTag());
+                    }
+                });
     }
 
     public void onSectionAttached(int number) {

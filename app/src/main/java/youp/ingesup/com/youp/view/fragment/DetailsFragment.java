@@ -219,7 +219,7 @@ public class DetailsFragment extends Fragment {
         Integer id_organizer = evenement.getOrganisateurId();
 
         try{
-            ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(id_organizer));
+            ((HomeActivity) getActivity()).goToFragment(MainAccountFragment.newInstance(id_organizer), "account");
         }catch(Exception ex)
         {
             Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());

@@ -29,6 +29,15 @@
 
         </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/tv_no_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+
         <ProgressBar
 
             android:id="@+id/loadComment"

@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +37,8 @@ public class MyAccountFriendsFragment extends Fragment {
     private ListView listView;
     private UserService serviceUser;
 
+    private TextView textViewNoResult;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class MyAccountFriendsFragment extends Fragment {
             profile_id = Auth.getInstance().getUser().getId();
 
         listView = (ListView)viewRoot.findViewById(R.id.listViewFriends);
+        textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
+        textViewNoResult.setText("Vous n'avez aucun ami.");
 
         RestAdapter serviceUserBuilder = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
         serviceUser = serviceUserBuilder.create(UserService.class);
@@ -52,18 +59,16 @@ public class MyAccountFriendsFragment extends Fragment {
             @Override
             public void success(Friend[] users, Response response) {
 
-                if(users == null || users.length == 0)
-                {
-                    if(getActivity() != null)
-                        Toast.makeText(getActivity(), "Aucun ami.", Toast.LENGTH_LONG).show();
+                if(users == null || users.length == 0) {
+                    textViewNoResult.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.GONE);
+                    return;
                 }
-                else
-                {
-                    friends = new ArrayList<Friend>();
-                    Collections.addAll(friends, users);
-                    MyAccountFriendsAdapter adapter = new MyAccountFriendsAdapter(getActivity(),R.layout.item_friend ,friends);
-                    listView.setAdapter(adapter);
-                }
+
+                friends = new ArrayList<Friend>();
+                Collections.addAll(friends, users);
+                MyAccountFriendsAdapter adapter = new MyAccountFriendsAdapter(getActivity(),R.layout.item_friend ,friends);
+                listView.setAdapter(adapter);
 
             }
 

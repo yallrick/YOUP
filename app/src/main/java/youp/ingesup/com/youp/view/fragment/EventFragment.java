@@ -14,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -41,6 +42,9 @@ public class EventFragment extends Fragment {
     private EventAdapter adapter;
     private int mLastItem;
 
+
+    private TextView textViewNoResult;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class EventFragment extends Fragment {
         loadEvent = (ProgressBar)viewRoot.findViewById(R.id.loadEvent);
         listView = (ListView)viewRoot.findViewById(R.id.list);
 
+        textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
+        textViewNoResult.setText("Aucun évènement disponible.");
 
         bottomView = new ProgressBar(getActivity());
         listView.addFooterView(bottomView);
@@ -120,7 +126,14 @@ public class EventFragment extends Fragment {
             serviceEvent.getEvents(new Callback<List<Evenement>>() {
                 @Override
                 public void success(List<Evenement> evenements, Response response) {
+                    if(evenements == null || evenements.size() ==0){
 
+                        textViewNoResult.setVisibility(View.VISIBLE);
+                        loadEvent.setVisibility(View.GONE);
+                        listView.setVisibility(View.GONE);
+                        return;
+
+                    }
 
                     loadEvent.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);

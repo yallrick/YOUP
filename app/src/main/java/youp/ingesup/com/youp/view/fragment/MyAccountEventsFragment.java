@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -32,6 +33,8 @@ public class MyAccountEventsFragment extends Fragment {
     private List<Evenement> events;
     private ListView listView;
 
+    private TextView textViewNoResult;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +51,20 @@ public class MyAccountEventsFragment extends Fragment {
             profile_id = Auth.getInstance().getUser().getId();
 
         listView = (ListView)root.findViewById(R.id.listEventProfile);
+        textViewNoResult = (TextView) root.findViewById(R.id.tv_no_result);
+        textViewNoResult.setText("Aucun évènement disponible.");
 
         RestAdapter serviceEventBuilder = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService serviceEvent = serviceEventBuilder.create(EventService.class);
         serviceEvent.getEvents(profile_id.toString(),new Callback<List<Evenement>>() {
             @Override
             public void success(List<Evenement> evenements, Response response) {
-                if(evenements == null)
+                if(evenements == null || evenements.size() == 0){
+                    textViewNoResult.setVisibility(View.VISIBLE);
+
+                    listView.setVisibility(View.GONE);
                     return;
+                }
 
                 events = evenements;
 

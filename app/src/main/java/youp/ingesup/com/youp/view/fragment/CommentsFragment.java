@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -46,6 +47,9 @@ public class CommentsFragment  extends Fragment {
     private ForumService serviceForum;
     private ProgressBar loadComment;
 
+
+    private TextView textViewNoResult;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +67,8 @@ public class CommentsFragment  extends Fragment {
         loadComment = (ProgressBar)viewRoot.findViewById(R.id.loadComment);
         listView = (ListView) viewRoot.findViewById(R.id.listComments);
         Button btnSendComment = (Button)viewRoot.findViewById(R.id.btnSendComment);
+        textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
+        textViewNoResult.setText("Aucun commentaire disponible.");
 
 
 
@@ -136,6 +142,13 @@ public class CommentsFragment  extends Fragment {
         serviceForum.getMessages(String.valueOf(topicID), new Callback<Message[]>() {
             @Override
             public void success(Message[] commentaires, Response response) {
+
+                if(commentaires == null || commentaires.length == 0){
+
+                    textViewNoResult.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.GONE);
+                    return;
+                }
 
                 loadComment.setVisibility(View.GONE);
                 listView.setVisibility(View.VISIBLE);

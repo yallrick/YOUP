@@ -1,5 +1,6 @@
 package youp.ingesup.com.youp.view.fragment;
 
+import android.app.ActionBar;
 import android.app.Activity;
 
 import android.content.Intent;
@@ -59,6 +60,12 @@ public class EventFragment extends Fragment {
         textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
         textViewNoResult.setText("Aucun évènement disponible.");
 
+        ActionBar actionBar = getActivity().getActionBar();
+
+        actionBar.removeAllTabs();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
+
         bottomView = new ProgressBar(getActivity());
         listView.addFooterView(bottomView);
 
@@ -90,10 +97,10 @@ public class EventFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try{
-                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()));
+                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()), "detail");
                 }catch(Exception ex)
                 {
-                    Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
+                    Log.e("EventFragment", "Fail to open new Fragment (Envoi de l'ID vers EventActivity)");
                 }
 
             }

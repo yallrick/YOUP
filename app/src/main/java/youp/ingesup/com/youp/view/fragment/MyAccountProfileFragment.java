@@ -1,5 +1,6 @@
 package youp.ingesup.com.youp.view.fragment;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -26,6 +28,8 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.view.HomeActivity;
+import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
 /**
  * Created by Vincent del Valle on 14/11/2014.
@@ -96,16 +100,10 @@ public class MyAccountProfileFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Problème pour récupérer des informations du profil.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Fail to get the profile's information. Please, try again later.", Toast.LENGTH_LONG).show();
             }
         });
-
-
         return root;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 
     private void ChargementDonnees()
@@ -136,14 +134,79 @@ public class MyAccountProfileFragment extends Fragment {
         if(user.getSexe()) imageSexe = IMAGE_MALE;
         imgSexe.setImageResource(imageSexe);
 
+
+
         if(String.valueOf(Auth.getInstance().getUser().getId()).equals(String.valueOf(MainAccountFragment.profileID)))
             buttonBecomeFriend.setVisibility(View.GONE);
-        else
+        else {
+            if(Auth.getInstance() != null)
+            {
+                final Integer profile_id = Auth.getInstance().getUser().getId();
+                userService.getFriends(profile_id.toString(), new Callback<Friend[]>() {
+                    @Override
+                    public void success(Friend[] users, Response response)
+                    {
+                        if(users == null || users.length == 0)
+                        {
+                            buttonBecomeFriend.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            List<Friend> friends = new ArrayList<Friend>();
+                            Collections.addAll(friends, users);
+
+                            for(Friend f:friends)
+                            {
+                                if(f.getId() == profile_id)
+                                    buttonBecomeFriend.setVisibility(View.GONE);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        buttonBecomeFriend.setVisibility(View.GONE);
+                    }
+                });
+            }
+
+
+
             buttonBecomeFriend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO Faire la requête pour devenir ami
+                    DevenirAmi();
                 }
             });
+        }
+    }
+
+    private void DevenirAmi()
+    {
+        if (Auth.getInstance() != null)
+        {
+            RestAdapter serviceUserBuilder = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+            userService = serviceUserBuilder.create(UserService.class);
+
+            /*** Envoi une requpete d'ami ***/
+            userService.sendFriendRequest(Auth.getInstance().getUser().getId().toString(), MainAccountFragment.profileID.toString() ,new Callback<Boolean>() {
+                @Override
+                public void success(Boolean aBoolean, Response response) {
+                    Toast.makeText(getActivity(), "Friend request sended.", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getActivity(),  "Fail to send the friend request. Please, try again later.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
+
+            ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false), "login");
+        }
     }
 }

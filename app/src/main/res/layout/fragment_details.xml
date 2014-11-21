@@ -25,7 +25,6 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Title maybe really long"
             android:gravity="center_horizontal"
             android:id="@+id/tvTitleEventDetails" />
 
@@ -47,7 +46,7 @@
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/imgDetails"
                 android:layout_alignTop="@id/imgDetails"
@@ -55,50 +54,17 @@
                 android:orientation="vertical"
                 android:id="@+id/linearLayout">
 
-                <LinearLayout
-                    android:id="@+id/duration_layout"
+                <TextView
+                    android:id="@+id/tvDateDetails"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tvDateDetails"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="12/11/2014"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text=" - "/>
-
-                    <TextView
-                        android:id="@+id/tvTimeDetails"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="18:00"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text=" - "/>
-
-                    <TextView
-                        android:id="@+id/tvDurationDetails"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="1 day"/>
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="12/11/2014"/>
 
                 <TextView
                     android:id="@+id/tvLocationDetails"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="16sp"
@@ -110,6 +76,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="16sp"
+                    android:textStyle="italic"
                     android:text="Category" />
 
 
@@ -119,6 +86,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     android:text="1337 €" />
 
 
@@ -180,8 +148,7 @@
             android:background="@drawable/item_event_background"
             android:textSize="18dp"
             android:layout_margin="4dp"
-            android:padding="4dp"
-            android:text="@string/lorem_ipsum" />
+            android:padding="4dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

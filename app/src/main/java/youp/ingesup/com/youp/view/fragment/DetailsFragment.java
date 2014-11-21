@@ -96,23 +96,41 @@ public class DetailsFragment extends Fragment {
         /* Récupérer les informations de l'event : Indent + Appel API */
         this.eventID = ((EventActivity)getActivity()).eventID;
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService service = restAdapter.create(EventService.class);
         service.getEvent(this.eventID.toString(), new Callback<Evenement>() {
             @Override
             public void success(Evenement evenement, Response response) {
-                tvTitle.setText(evenement.getTitreEvenement());
-                /* TODO: Remplir les autres champs */
-                // tvDescription.setText(evenement.getDescription());
 
-                // tvCategorie.setText("Loading...");
+
+                tvTitle.setText(evenement.getTitreEvenement());
 
                 DateTime dateTime = new DateTime(evenement.getDateEvenement());
                 tvDate.setText(dateTime.getDateInFrench());
-                tvPrice.setText(evenement.getPrix() + " €");
-                tvLocation.setText(evenement.getAdresse().getAdresse());
-                //ImageLoader imageLoader = ImageLoader.getInstance();
-                //imageLoader.displayImage(evenement.getImage, img);
+
+
+                if(evenement.getPrix() != null)
+                    tvPrice.setText(evenement.getPrix() + " €");
+                else
+                    tvPrice.setText("- €");
+
+                if(evenement.getAdresse() != null)
+                    tvLocation.setText(evenement.getAdresse().getAdresse());
+                else
+                    tvLocation.setText("-");
+
+                if(evenement.getCategorie_Libelle() != null && !evenement.getCategorie_Libelle().isEmpty())
+                    tvCategorie.setText(evenement.getCategorie_Libelle());
+                else
+                    tvCategorie.setText("-");
+
+                if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
+                    ImageLoader imageLoader = ImageLoader.getInstance();
+                    imageLoader.displayImage(evenement.getImageUrl(), img);
+                }
+
+
+                tvDescription.setText(evenement.getDescriptionEvenement());
 
             }
 
@@ -121,7 +139,7 @@ public class DetailsFragment extends Fragment {
                 Activity context = getActivity();
 
                 if(context != null)
-                    Toast.makeText(context, "Connexion échouée.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Fail to find event's details.", Toast.LENGTH_LONG).show();
             }
         });
 

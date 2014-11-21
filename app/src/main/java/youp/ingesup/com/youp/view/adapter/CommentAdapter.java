@@ -1,6 +1,7 @@
 package youp.ingesup.com.youp.view.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +51,11 @@ public class CommentAdapter extends ArrayAdapter<Message>
         TextView tvComment = (TextView)convertView.findViewById(R.id.tvComment);
 
         // Chargement des données
-        tvWriterComment.setText(currentItem.getUserId());
-        tvComment.setText(currentItem.getContent());
+        if(tvWriterComment != null)
+            tvWriterComment.setText("#" + String.valueOf(currentItem.getUserId()));
+
+
+        tvComment.setText(Html.fromHtml(currentItem.getContent()));
 
         DateTime dateTime = new DateTime(currentItem.getDatePost());
         tvDate.setText(dateTime.getDateInFrench());

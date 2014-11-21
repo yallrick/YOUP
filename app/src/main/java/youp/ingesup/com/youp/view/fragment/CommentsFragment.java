@@ -28,6 +28,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
+import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Message;
 import youp.ingesup.com.youp.model.services.ForumService;
 import youp.ingesup.com.youp.view.EventActivity;
@@ -43,6 +44,7 @@ public class CommentsFragment  extends Fragment {
     private List<Message> comments;
     private ListView listView;
     private Integer eventID;
+    private Integer topicID;
     private ForumService serviceForum;
     private ProgressBar loadComment;
 
@@ -57,6 +59,7 @@ public class CommentsFragment  extends Fragment {
 
         /* Récupérer les informations de l'event : Indent + Appel API */
         eventID = ((EventActivity)getActivity()).eventID;
+        topicID = 77;
 
         final EditText etComments = (EditText)viewRoot.findViewById(R.id.etComments);
         loadComment = (ProgressBar)viewRoot.findViewById(R.id.loadComment);
@@ -76,21 +79,31 @@ public class CommentsFragment  extends Fragment {
                 }
                 /**/
 
+                if(etComments.getText() == null || etComments.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "You must write something in your comment! :)", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 String idUser = String.valueOf(Auth.getInstance().getUser().getId());
                 //String idUser = "7";
 
-                serviceForum.sendMessage(String.valueOf(eventID), idUser, etComments.getText().toString(), "2014-11-20 12:35:29.123", new Callback<Boolean>() {
+                String dateNow = DateTime.now().generateValue();
+
+                serviceForum.sendMessage(String.valueOf(topicID), idUser, etComments.getText().toString(), dateNow, new Callback<Boolean>() {
                     @Override
                     public void success(Boolean aBoolean, Response response) {
                         if(aBoolean)
                             loadComments();
                         else
                             Toast.makeText(getActivity(), "Comments are not allowed here. Sorry!", Toast.LENGTH_LONG).show();
+
+                        etComments.setText("");
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Toast.makeText(getActivity(), "Fail to send your comment. Please, try again later.", Toast.LENGTH_LONG).show();
+                        etComments.setText("");
                     }
                 });
             }
@@ -119,7 +132,7 @@ public class CommentsFragment  extends Fragment {
         loadComment.setVisibility(View.VISIBLE);
         listView.setVisibility(View.GONE);
 
-        serviceForum.getMessages(String.valueOf(eventID), new Callback<Message[]>() {
+        serviceForum.getMessages(String.valueOf(topicID), new Callback<Message[]>() {
             @Override
             public void success(Message[] commentaires, Response response) {
 

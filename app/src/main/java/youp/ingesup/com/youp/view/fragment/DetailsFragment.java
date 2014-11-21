@@ -138,12 +138,12 @@ public class DetailsFragment extends Fragment {
                 else
                     tvPrice.setText("- €");
 
-                if(evenement.getEventAdresse().getPays() != null && !evenement.getEventAdresse().getPays().isEmpty())
+                if(evenement.getEventAdresse() != null && evenement.getEventAdresse().getPays() != null && !evenement.getEventAdresse().getPays().isEmpty())
                     tvLocation.setText(evenement.getEventAdresse().getPays());
                 else
                     tvLocation.setText("-");
 
-                if(evenement.getCategorie().getLabel() != null && !evenement.getCategorie().getLabel().isEmpty())
+                if( evenement.getCategorie() != null && evenement.getCategorie().getLabel() != null && !evenement.getCategorie().getLabel().isEmpty())
                     tvCategorie.setText(evenement.getCategorie().getLabel());
                 else
                     tvCategorie.setText("-");

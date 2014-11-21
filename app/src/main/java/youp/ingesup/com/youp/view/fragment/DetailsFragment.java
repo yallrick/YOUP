@@ -1,9 +1,12 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +48,7 @@ public class DetailsFragment extends Fragment {
     private Button btOrganizer;
 
     private Integer eventID;
+    private Evenement evenement;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,27 @@ public class DetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                /* TODO: Partager l'événement */
+
+                if(getActivity() == null || evenement == null)
+                    return;
+
+                try {
+                    String adUrl = "";
+
+                    adUrl += "<h1>"+evenement.getTitreEvenement()+"</h1>";
+                    adUrl += "<p>"+ evenement.getDescriptionEvenement() +"</p>";
+                    adUrl += "<p><a href=\"#\">See more</a></p>";
+
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("message/rfc822");
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Event YOUP");
+                    intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(adUrl));
+
+                    getActivity().startActivity(Intent.createChooser(intent, "Email :"));
+                }catch (ActivityNotFoundException e){
+                    Toast.makeText(getActivity(), "Fail to share by email.", Toast.LENGTH_LONG).show();
+                }catch (Exception ignored){}
+
             }
         });
 
@@ -102,25 +126,25 @@ public class DetailsFragment extends Fragment {
             @Override
             public void success(Evenement evenement, Response response) {
 
-
+                DetailsFragment.this.evenement = evenement;
                 tvTitle.setText(evenement.getTitreEvenement());
 
                 DateTime dateTime = new DateTime(evenement.getDateEvenement());
                 tvDate.setText(dateTime.getDateInFrench());
 
 
-                if(evenement.getPrix() != null)
-                    tvPrice.setText(evenement.getPrix() + " €");
+                if(evenement.getPrice() != null)
+                    tvPrice.setText(evenement.getPrice() + " €");
                 else
                     tvPrice.setText("- €");
 
-                if(evenement.getAdresse() != null)
-                    tvLocation.setText(evenement.getAdresse().getAdresse());
+                if(evenement.getEventAdresse().getPays() != null && !evenement.getEventAdresse().getPays().isEmpty())
+                    tvLocation.setText(evenement.getEventAdresse().getPays());
                 else
                     tvLocation.setText("-");
 
-                if(evenement.getCategorie_Libelle() != null && !evenement.getCategorie_Libelle().isEmpty())
-                    tvCategorie.setText(evenement.getCategorie_Libelle());
+                if(evenement.getCategorie().getLabel() != null && !evenement.getCategorie().getLabel().isEmpty())
+                    tvCategorie.setText(evenement.getCategorie().getLabel());
                 else
                     tvCategorie.setText("-");
 

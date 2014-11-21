@@ -135,7 +135,8 @@ public class CommentsFragment  extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Fail to load comments.", Toast.LENGTH_LONG).show();
+                if(getActivity() != null)
+                    Toast.makeText(getActivity(), "Fail to load comments.", Toast.LENGTH_LONG).show();
             }
         });
     }

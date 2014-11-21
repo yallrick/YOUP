@@ -64,7 +64,7 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
 
 
         // image
-        String imageURL = currentItem.getImageUrl();
+        String imageURL = currentItem.getOrganisateurImageUrl();
         if( imageURL != null && !imageURL.isEmpty()) {
             ImageLoader imageLoader = ImageLoader.getInstance();
             imageLoader.displayImage(imageURL, imageView);

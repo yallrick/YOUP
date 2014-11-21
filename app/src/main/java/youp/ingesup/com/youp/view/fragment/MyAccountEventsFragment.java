@@ -67,9 +67,9 @@ public class MyAccountEventsFragment extends Fragment {
                 Activity  context = getActivity();
 
                 if(context != null && error.getResponse() != null)
-                    Toast.makeText(context, "Impossible de charger les events. " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Fail to load eventss. Please, try again later." + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(context, "Impossible de charger les events. ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Fail to load events. Please, try again later.\"", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -59,7 +59,7 @@ public class MyAccountFriendsFragment extends Fragment {
                 if(users == null || users.length == 0)
                 {
                     if(getActivity() != null)
-                        Toast.makeText(getActivity(), "Aucun ami.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),  "No friends.", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -73,7 +73,7 @@ public class MyAccountFriendsFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Problème pour récupérer les amis.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),  "Fail to get the friend's list. Please, try again later.", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -27,6 +27,7 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.view.HomeActivity;
 import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
@@ -106,7 +107,7 @@ public class MyAccountProfileFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Problème pour récupérer des informations du profil.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),  "Fail to get the profile's informations. Please, try again later.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -156,6 +157,23 @@ public class MyAccountProfileFragment extends Fragment {
             userService = serviceUserBuilder.create(UserService.class);
 
             /*** Envoi une requpete d'ami ***/
+            userService.sendFriendRequest(Auth.getInstance().getUser().getId().toString(), MainAccountFragment.profileID.toString() ,new Callback<Boolean>() {
+                @Override
+                public void success(Boolean aBoolean, Response response) {
+                    Toast.makeText(getActivity(), "Friend request sended.", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getActivity(),  "Fail to send the friend request. Please, try again later.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
+
+            ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false));
         }
     }
 }

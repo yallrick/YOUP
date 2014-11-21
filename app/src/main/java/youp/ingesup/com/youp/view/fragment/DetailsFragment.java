@@ -90,7 +90,8 @@ public class DetailsFragment extends Fragment {
         btShare.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 if(getActivity() == null || evenement == null)
                     return;
@@ -162,7 +163,6 @@ public class DetailsFragment extends Fragment {
 
 
                 tvDescription.setText(evenement.getDescriptionEvenement());
-
                 btOrganizer.setText(evenement.getOrganisateurPseudo());
 
             }

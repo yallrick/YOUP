@@ -219,7 +219,6 @@ public class DetailsFragment extends Fragment {
         // ENVOYER VERS INTENT DE PROFIL
         Integer id_organizer = evenement.getOrganisateurId();
 
-
         try{
             Intent intent = new Intent(getActivity(), MyAccountActivity.class);
             intent.putExtra(MyAccountActivity.PARAM_ID_PROFILE, id_organizer);

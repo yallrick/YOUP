@@ -46,7 +46,7 @@ public class Evenement {
     private Integer minimumParticipant;
 
 
-    @com.google.gson.annotations.SerializedName("OrganisateurId")
+    @com.google.gson.annotations.SerializedName("Organisateur_id")
     private Integer organisateurId;
 
     @com.google.gson.annotations.SerializedName("Payant")

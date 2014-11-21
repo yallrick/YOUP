@@ -23,7 +23,7 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.view.EventActivity;
+import youp.ingesup.com.youp.view.HomeActivity;
 import youp.ingesup.com.youp.view.MyAccountActivity;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
@@ -81,10 +81,8 @@ public class MyAccountEventsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try{
-                    Intent intent = new Intent(getActivity(), EventActivity.class);
-                    intent.putExtra(EventActivity.PARAM_ID_EVENT, events.get(position).getEvenement_id());
-                    //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
-                    startActivity(intent);
+
+                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()));
                 }catch(Exception ex)
                 {
                     Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());

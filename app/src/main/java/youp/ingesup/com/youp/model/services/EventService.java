@@ -69,8 +69,8 @@ public interface EventService {
     void getNextEvents( @Query("max_id") String maxId , Callback<List<Evenement>> callback);
 
 
-    @GET("/api/Evenement?id_profil={id_profil}")
-    void getEvents(@Path("id_profil") String idProfile,
+    @GET("/api/Evenement")
+    void getEvents(@Query("id_profil") String idProfile,
                      Callback<List<Evenement>> callback);
 
 

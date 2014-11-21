@@ -21,11 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.LoginActivity"/>
-
         <activity android:name=".view.MyAccountActivity" />
-
-        <activity android:name=".view.EventActivity" />
     </application>
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />

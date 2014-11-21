@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center_horizontal"
+            android:id="@+id/tvPseudoProfile" />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_event_background"
+            android:layout_margin="4dp"
+            android:padding="4dp">
+
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@color/Blue"
+                android:layout_margin="4dp"
+                />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_toEndOf="@id/imgProfile"
+                   android:layout_alignTop="@id/imgProfile"
+                   android:layout_marginLeft="5dp"
+                   android:orientation="vertical"
+                   android:id="@+id/linearLayout1">
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginBottom="10dp">
+
+                       <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="12">
+
+                            <RelativeLayout
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rlIdentity">
+
+                                <TextView
+                                    android:id="@+id/tvNomProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18sp"
+                                    android:text="NOM"/>
+
+                                <TextView
+                                    android:id="@+id/tvPrenomProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:textSize="18sp"
+                                    android:text="Prénom"
+                                    android:layout_toEndOf="@+id/tvNomProfile"
+                                    android:layout_alignParentTop="true" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/lblInscrit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Registered since"
+                                    android:layout_alignParentStart="true" />
+
+                                <TextView
+                                    android:id="@+id/tvDateInscription"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="01/01/2014"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_toEndOf="@+id/lblInscrit"
+                                    android:layout_alignTop="@+id/lblInscrit" />
+                            </RelativeLayout>
+
+                       </LinearLayout>
+
+                       <ImageView
+                           android:id="@+id/imgGender"
+                           android:layout_width="32dp"
+                           android:layout_height="32dp"
+                           android:layout_weight="1"
+                           android:src="@color/Blue"
+                           android:layout_margin="4dp"
+                           />
+
+                   </LinearLayout>
+
+                   <RelativeLayout
+                       xmlns:android="http://schemas.android.com/apk/res/android"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:id="@+id/lblNeLe"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="14sp"
+                           android:text="Birth the"
+                           android:layout_alignParentStart="true" />
+
+                       <TextView
+                           android:id="@+id/tvDateNaissance"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="14sp"
+                           android:text="01/01/2014"
+                           android:layout_marginLeft="4dp"
+                           android:layout_toEndOf="@+id/lblNeLe"
+                           android:layout_alignTop="@+id/lblNeLe" />
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       xmlns:android="http://schemas.android.com/apk/res/android"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:id="@+id/lblHabite"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="14sp"
+                           android:text="Live in"
+                           android:layout_alignParentStart="true" />
+
+                       <TextView
+                           android:id="@+id/tvCity"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="14sp"
+                           android:text="CITY"
+                           android:layout_marginLeft="4dp"
+                           android:layout_toEndOf="@+id/lblHabite"
+                           android:layout_alignTop="@+id/lblHabite" />
+                   </RelativeLayout>
+
+                   <RelativeLayout
+                       xmlns:android="http://schemas.android.com/apk/res/android"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <TextView
+                           android:id="@+id/lblMetier"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="14sp"
+                           android:text="Works as"
+                           android:layout_alignParentStart="true" />
+
+                       <TextView
+                           android:id="@+id/tvMetier"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="14sp"
+                           android:text="IT Scientist"
+                           android:layout_marginLeft="4dp"
+                           android:layout_toEndOf="@+id/lblMetier"
+                           android:layout_alignTop="@+id/lblMetier" />
+                   </RelativeLayout>
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:text="test@test.com"
+                       android:id="@+id/tvEmailProfile" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgProfile"
+        android:background="@drawable/item_event_background"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/lorem_ipsum"
+        android:id="@+id/tvPresentationProfile"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgProfile"
+        android:layout_alignStart="@+id/img">
+
+        <!-- Boutton Subscribe, Organizer, Share -->
+        <Button
+            android:layout_width="match_parent"
+            android:background="@drawable/rounded_clickable_blue"
+            android:layout_height="35dp"
+            android:layout_weight="0.85"
+            android:text="Become friend"
+            android:textSize="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/btDevenirAmi" />
+    </LinearLayout>
+</LinearLayout>

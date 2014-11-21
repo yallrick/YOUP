@@ -1,55 +1,67 @@
-package youp.ingesup.com.youp.view;
+package youp.ingesup.com.youp.view.fragment;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.adapter.TabsEventAdapter;
-import youp.ingesup.com.youp.view.fragment.CommentsFragment;
-import youp.ingesup.com.youp.view.fragment.DetailsFragment;
 
 import static android.app.ActionBar.TabListener;
 
 /**
  * Created by Damiano on 14/11/2014.
  */
-public class EventActivity extends FragmentActivity implements TabListener , DetailsFragment.OnFragmentInteractionListener, CommentsFragment.OnFragmentInteractionListener{
+public class MainEventFragment extends Fragment implements TabListener {
     private ViewPager viewPager;
     private TabsEventAdapter mAdapter;
     private ActionBar actionBar;
 
     public static final String PARAM_ID_EVENT = "PARAM_ID_EVENT";
-    public static final String PARAM_ID_PROFILE = "PARAM_ID_PROFILE";
 
-    public Integer eventID;
+    public static Integer eventID;
     public Integer profileID;
 
     // Tab titles
     private String[] tabs = { "Details", "Comments"};
 
+    public static MainEventFragment newInstance(int eventId){
+        MainEventFragment fragment = new MainEventFragment();
+
+        Bundle b = new Bundle();
+        b.putInt(PARAM_ID_EVENT, eventId);
+        fragment.setArguments(b);
+
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View fragmentView = inflater.inflate(R.layout.activity_event, container, false);
 
         // Initilization
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new TabsEventAdapter(getSupportFragmentManager());
+        viewPager = (ViewPager) fragmentView.findViewById(R.id.pager);
+        actionBar = getActivity().getActionBar();
+        mAdapter = new TabsEventAdapter(getActivity().getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Récupération de l'ID de l'event
-        eventID = getIntent().getExtras().getInt(PARAM_ID_EVENT);
-        profileID = getIntent().getExtras().getInt(PARAM_ID_PROFILE);
+        eventID = getArguments().getInt(PARAM_ID_EVENT);
 
         // Adding Tabs
+
+        actionBar.removeAllTabs();
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
@@ -75,8 +87,9 @@ public class EventActivity extends FragmentActivity implements TabListener , Det
             public void onPageScrollStateChanged(int arg0) {
             }
         });
-    }
 
+        return fragmentView;
+    }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -92,10 +105,6 @@ public class EventActivity extends FragmentActivity implements TabListener , Det
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
     }
 }

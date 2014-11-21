@@ -26,7 +26,7 @@ public class MyAccountProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         /** TODO: CREER LA VUE **/
-        View root = inflater.inflate(R.layout.fragment_my_account_friends, container, false);
+        View root = inflater.inflate(R.layout.fragment_my_account_profile, container, false);
         return root;
     }
 

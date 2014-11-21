@@ -22,15 +22,17 @@ import static android.app.ActionBar.TabListener;
 /**
  * Created by Vincent del Valle on 14/11/2014.
  */
-public class MyAccountActivity extends FragmentActivity implements ActionBar.TabListener, MyAccountFriendsFragment.OnFragmentInteractionListener, MyAccountProfileFragment.OnFragmentInteractionListener, MyAccountEventsFragment.OnFragmentInteractionListener {
-    private ViewPager viewPager;
-    private MyAccountAdapter mAdapter;
-    private ActionBar actionBar;
+public class MyAccountActivity extends FragmentActivity implements
+        ActionBar.TabListener {
 
     public static final String PARAM_ID_PROFILE = "PARAM_ID_PROFILE";
 
     public Integer eventID;
     public Integer profileID;
+
+    private ViewPager viewPager;
+    private MyAccountAdapter mAdapter;
+    private ActionBar actionBar;
 
     // Tab titles
     private String[] tabs = { "Friends", "Events", "Profile"};
@@ -45,6 +47,8 @@ public class MyAccountActivity extends FragmentActivity implements ActionBar.Tab
         actionBar = getActionBar();
         mAdapter = new MyAccountAdapter(getSupportFragmentManager());
 
+
+        actionBar.removeAllTabs();
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -94,11 +98,6 @@ public class MyAccountActivity extends FragmentActivity implements ActionBar.Tab
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
     }
 }

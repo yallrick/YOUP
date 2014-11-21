@@ -1,8 +1,6 @@
 package youp.ingesup.com.youp.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -25,7 +22,6 @@ import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.bean.Location;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.view.EventActivity;
 
 /**
  * Created by Vincent del Valle on 07/11/2014.

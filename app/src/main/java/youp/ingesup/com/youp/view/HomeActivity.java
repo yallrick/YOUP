@@ -3,6 +3,7 @@ package youp.ingesup.com.youp.view;
 import android.app.Activity;
 
 import android.app.ActionBar;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,9 +21,11 @@ import android.widget.FrameLayout;
 import retrofit.RestAdapter;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.view.fragment.CommentsFragment;
 import youp.ingesup.com.youp.view.fragment.EventFragment;
+import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 
-public class HomeActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, SignUpFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -87,6 +90,13 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
         Log.e("HomeActivity", "onNavigationDrawerItemSelected() -> " + position);
     }
 
+    public void goToFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
     public void onSectionAttached(int number) {
         Log.e("HomeActivity", "onSectionAttached() -> " + number);
         switch (number) {
@@ -135,6 +145,11 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -178,8 +193,6 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             int itemSelected = getArguments().getInt(ARG_SECTION_NUMBER);
-
-
 
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 

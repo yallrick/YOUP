@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -26,7 +25,7 @@ import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.view.EventActivity;
+import youp.ingesup.com.youp.view.HomeActivity;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
 /**
@@ -85,10 +84,7 @@ public class EventFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try{
-                    Intent intent = new Intent(getActivity(), EventActivity.class);
-                    intent.putExtra(EventActivity.PARAM_ID_EVENT, events.get(position).getEvenement_id());
-                    //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
-                    startActivity(intent);
+                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()));
                 }catch(Exception ex)
                 {
                     Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());

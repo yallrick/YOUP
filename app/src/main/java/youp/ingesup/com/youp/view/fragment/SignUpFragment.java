@@ -47,9 +47,8 @@ public class SignUpFragment extends Fragment{
     private RadioButton rbMale;
     private RadioButton rbFemale;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public static SignUpFragment newInstance(){
+        return new SignUpFragment();
     }
 
     @Override

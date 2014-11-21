@@ -88,7 +88,7 @@ public class MyAccountFriendsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try{
-                    ((HomeActivity)getActivity()).goToFragment(MainEventFragment.newInstance(friends.get(position).getId()), "detail");
+                    ((HomeActivity)getActivity()).goToFragment(MainAccountFragment.newInstance(friends.get(position).getId()), "detail");
                 }catch(Exception ex)
                 {
                     Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());

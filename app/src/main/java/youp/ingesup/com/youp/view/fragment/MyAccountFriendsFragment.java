@@ -56,7 +56,8 @@ public class MyAccountFriendsFragment extends Fragment {
 
                 if(users == null || users.length == 0)
                 {
-                    Toast.makeText(getActivity(), "Aucun ami.", Toast.LENGTH_LONG).show();
+                    if(getActivity() != null)
+                        Toast.makeText(getActivity(), "Aucun ami.", Toast.LENGTH_LONG).show();
                 }
                 else
                 {

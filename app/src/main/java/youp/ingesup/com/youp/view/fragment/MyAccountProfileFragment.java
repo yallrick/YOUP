@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,6 +84,15 @@ public class MyAccountProfileFragment extends Fragment {
         tvDescription = (TextView) root.findViewById(R.id.tvPresentationProfile);
         imgProfil = (ImageView) root.findViewById(R.id.imgProfile);
 
+        Button btBecomeFriend = (Button) root.findViewById(R.id.btDevenirAmi);
+
+        btBecomeFriend.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DevenirAmi();
+            }
+        });
+
         RestAdapter serviceUserBuilder = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
         userService = serviceUserBuilder.create(UserService.class);
 
@@ -136,5 +146,16 @@ public class MyAccountProfileFragment extends Fragment {
         if(user.getSexe()) imageSexe = IMAGE_MALE;
         imgSexe.setImageResource(imageSexe);
 
+    }
+
+    private void DevenirAmi()
+    {
+        if (Auth.getInstance() != null)
+        {
+            RestAdapter serviceUserBuilder = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+            userService = serviceUserBuilder.create(UserService.class);
+
+            /*** Envoi une requpete d'ami ***/
+        }
     }
 }

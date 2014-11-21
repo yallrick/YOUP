@@ -5,9 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.view.HomeActivity;
 import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
@@ -72,6 +75,23 @@ public class MyAccountFriendsFragment extends Fragment {
             public void failure(RetrofitError error) {
                 Toast.makeText(getActivity(), "Problème pour récupérer les amis.", Toast.LENGTH_LONG).show();
             }
+        });
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                try{
+                    ((HomeActivity)getActivity()).goToFragment(MainEventFragment.newInstance(friends.get(position).getId()));
+                }catch(Exception ex)
+                {
+                    Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
+                }
+
+            }
+
         });
 
         return viewRoot;

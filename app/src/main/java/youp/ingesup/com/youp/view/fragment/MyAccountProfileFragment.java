@@ -21,7 +21,7 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.Friend;
 import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.MyAccountActivity;
+import youp.ingesup.com.youp.view.MainAccountFragment;
 import youp.ingesup.com.youp.view.adapter.MyAccountFriendsAdapter;
 
 /**
@@ -43,7 +43,7 @@ public class MyAccountProfileFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_my_account_profile, container, false);
 
-        Integer profile_id = ((MyAccountActivity)getActivity()).profileID;
+        Integer profile_id = MainAccountFragment.profileID;
         if(profile_id == 0 && Auth.getInstance().getUser() != null)
             profile_id = Auth.getInstance().getUser().getId();
 

@@ -26,7 +26,7 @@ import youp.ingesup.com.youp.model.services.EventService;
  * Created by Damiano on 14/11/2014.
  */
 public class DetailsFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
+    private SignUpFragment.OnFragmentInteractionListener mListener;
 
     private TextView tvTitle;
     private TextView tvDescription;
@@ -127,7 +127,7 @@ public class DetailsFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (SignUpFragment.OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -138,10 +138,6 @@ public class DetailsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 
     private void Subscription()

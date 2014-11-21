@@ -31,6 +31,8 @@ public class MyAccountActivity extends FragmentActivity implements
         adapter = new MyAccountAdapter(getSupportFragmentManager());
         actionBar = getActionBar();
 
+
+        actionBar.removeAllTabs();
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
         }

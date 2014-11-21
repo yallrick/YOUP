@@ -19,19 +19,27 @@ import static android.app.ActionBar.TabListener;
 /**
  * Created by Damiano on 14/11/2014.
  */
-public class MainEventFragment extends Fragment implements TabListener , DetailsFragment.OnFragmentInteractionListener {
+public class MainEventFragment extends Fragment implements TabListener {
     private ViewPager viewPager;
     private TabsEventAdapter mAdapter;
     private ActionBar actionBar;
 
     public static final String PARAM_ID_EVENT = "PARAM_ID_EVENT";
-    public static final String PARAM_ID_PROFILE = "PARAM_ID_PROFILE";
 
     public static Integer eventID;
-    public int profileID;
 
     // Tab titles
     private String[] tabs = { "Details", "Comments"};
+
+    public static MainEventFragment newInstance(int eventId){
+        MainEventFragment fragment = new MainEventFragment();
+
+        Bundle b = new Bundle();
+        b.putInt(PARAM_ID_EVENT, eventId);
+        fragment.setArguments(b);
+
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,10 +56,11 @@ public class MainEventFragment extends Fragment implements TabListener , Details
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Récupération de l'ID de l'event
-        eventID = getActivity().getIntent().getExtras().getInt(PARAM_ID_EVENT);
-        profileID = getActivity().getIntent().getExtras().getInt(PARAM_ID_PROFILE);
+        eventID = getArguments().getInt(PARAM_ID_EVENT);
 
         // Adding Tabs
+
+        actionBar.removeAllTabs();
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
@@ -95,10 +104,6 @@ public class MainEventFragment extends Fragment implements TabListener , Details
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
     }
 }

@@ -173,15 +173,6 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                if (!mUserLearnedDrawer) {
-                    // The user manually opened the drawer; store this flag to prevent auto-showing
-                    // the navigation drawer automatically in the future.
-                    mUserLearnedDrawer = true;
-                    SharedPreferences sp = PreferenceManager
-                            .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
-                }
-
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
@@ -212,8 +203,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         boolean connected = Auth.isLoggedIn();
 
-
-
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
         }
@@ -225,15 +214,12 @@ public class NavigationDrawerFragment extends Fragment {
             switch (position){
                 case 1: // Connexion
 
-                    Intent intentSignIn = new Intent(getActivity(), MainLoginFragment.class);
-                    startActivity(intentSignIn);
+                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false));
 
                     return;
-                case 2: // Création de compte
+                case 2:
 
-                    Intent intentSignUp = new Intent(getActivity(), MainLoginFragment.class);
-                    intentSignUp.putExtra(MainLoginFragment.PARAM_GO_SIGN_UP, true);
-                    startActivity(intentSignUp);
+                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(true));
 
                     return;
             }

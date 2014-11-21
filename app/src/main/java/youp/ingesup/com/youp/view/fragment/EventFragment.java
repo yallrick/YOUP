@@ -1,10 +1,10 @@
 package youp.ingesup.com.youp.view.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,7 @@ import retrofit.client.Response;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.services.EventService;
+import youp.ingesup.com.youp.view.HomeActivity;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;
 
 /**
@@ -66,8 +67,9 @@ public class EventFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 try{
+                    ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()));
                     Intent intent = new Intent(getActivity(), MainEventFragment.class);
-                    intent.putExtra(MainEventFragment.PARAM_ID_EVENT, events.get(position).getId());
+                    intent.putExtra(MainEventFragment.PARAM_ID_EVENT, events.get(position).getEvenement_id());
                     //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
                     startActivity(intent);
                 }catch(Exception ex)

@@ -1,5 +1,6 @@
 package youp.ingesup.com.youp.view.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,7 @@ import youp.ingesup.com.youp.R;
  */
 public class CommentsFragment  extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
+    private SignUpFragment.OnFragmentInteractionListener mListener;
 
     //private List<Comment> comments;
     private ListView listView;
@@ -60,10 +61,6 @@ public class CommentsFragment  extends Fragment {
 
 
         return viewRoot;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 }
 

@@ -3,9 +3,11 @@ package youp.ingesup.com.youp.view;
 import android.app.Activity;
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,9 +21,11 @@ import android.widget.FrameLayout;
 import retrofit.RestAdapter;
 import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.services.UserService;
+import youp.ingesup.com.youp.view.fragment.CommentsFragment;
 import youp.ingesup.com.youp.view.fragment.EventFragment;
+import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 
-public class HomeActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, SignUpFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -61,7 +65,7 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
             container.removeAllViews();
             Log.e("onNavigationDrawerItemSelected", "container is clean");
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
@@ -69,6 +73,13 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         else Log.e("onNavigationDrawerItemSelected", "container is null !!");
 
         Log.e("HomeActivity", "onNavigationDrawerItemSelected() -> " + position);
+    }
+
+    public void goToFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -119,6 +130,11 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -162,8 +178,6 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             int itemSelected = getArguments().getInt(ARG_SECTION_NUMBER);
-
-
 
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 

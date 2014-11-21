@@ -20,7 +20,7 @@ import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 
 
 public class MainLoginFragment extends Fragment implements
-        ActionBar.TabListener, LoginFragment.OnFragmentInteractionListener, SignUpFragment.OnFragmentInteractionListener{
+        ActionBar.TabListener {
 
     public final static String PARAM_GO_SIGN_UP = "PARAM_GO_SIGN_UP";
 
@@ -30,6 +30,16 @@ public class MainLoginFragment extends Fragment implements
 
     // Tab titles
     private String[] tabs = { "Login", "Sign Up"};
+
+    public static MainLoginFragment newInstance(boolean goSignUp){
+        MainLoginFragment fragment = new MainLoginFragment();
+
+        Bundle b = new Bundle();
+        b.putBoolean(PARAM_GO_SIGN_UP, goSignUp);
+        fragment.setArguments(b);
+
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,7 +54,8 @@ public class MainLoginFragment extends Fragment implements
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        // Adding Tabs
+        // Adding Tab
+        actionBar.removeAllTabs();
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
         }
@@ -95,11 +106,6 @@ public class MainLoginFragment extends Fragment implements
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
     }
 }

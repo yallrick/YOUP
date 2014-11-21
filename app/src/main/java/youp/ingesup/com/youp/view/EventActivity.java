@@ -26,7 +26,7 @@ public class EventActivity extends FragmentActivity implements TabListener , Det
     public static final String PARAM_ID_PROFILE = "PARAM_ID_PROFILE";
 
     public Integer eventID;
-    public int profileID;
+    public Integer profileID;
 
     // Tab titles
     private String[] tabs = { "Details", "Comments"};

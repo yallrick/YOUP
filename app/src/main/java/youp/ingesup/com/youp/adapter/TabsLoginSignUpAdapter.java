@@ -3,11 +3,12 @@ package youp.ingesup.com.youp.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 import youp.ingesup.com.youp.view.fragment.LoginFragment;
 
-public class TabsLoginSignUpAdapter extends FragmentPagerAdapter {
+public class TabsLoginSignUpAdapter extends FragmentStatePagerAdapter {
     /**
      * Created by Damiano on 31/10/2014.
      */

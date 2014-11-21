@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,17 +27,14 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
-import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.EventService;
-import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.EventActivity;
 import youp.ingesup.com.youp.view.MyAccountActivity;
 
 /**
  * Created by Damiano on 14/11/2014.
  */
 public class DetailsFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
+    private SignUpFragment.OnFragmentInteractionListener mListener;
 
     private TextView tvTitle;
     private TextView tvDescription;
@@ -121,13 +117,16 @@ public class DetailsFragment extends Fragment {
         });
 
         /* Récupérer les informations de l'event : Indent + Appel API */
-         Integer eventID = ((EventActivity)getActivity()).eventID;
+        this.eventID = MainEventFragment.eventID;
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService service = restAdapter.create(EventService.class);
         service.getEvent(eventID.toString(), new Callback<Evenement>() {
             @Override
             public void success(Evenement event, Response response) {
+
+                if(event == null)
+                    return;
 
                 evenement = event;
 
@@ -186,7 +185,7 @@ public class DetailsFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (SignUpFragment.OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -197,10 +196,6 @@ public class DetailsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 
     private void Subscription()

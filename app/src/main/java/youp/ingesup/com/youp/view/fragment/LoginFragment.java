@@ -33,7 +33,7 @@ import youp.ingesup.com.youp.model.services.UserService;
 import youp.ingesup.com.youp.tool.FieldValidator;
 
 public class LoginFragment extends Fragment{
-    private OnFragmentInteractionListener mListener;
+    private SignUpFragment.OnFragmentInteractionListener mListener;
 
     private Button btLogin;
     private Button btLostPassword;
@@ -81,7 +81,7 @@ public class LoginFragment extends Fragment{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (SignUpFragment.OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -92,10 +92,6 @@ public class LoginFragment extends Fragment{
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
     }
 
     private void Login()

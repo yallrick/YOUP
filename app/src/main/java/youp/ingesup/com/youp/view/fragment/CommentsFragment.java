@@ -68,7 +68,7 @@ public class CommentsFragment  extends Fragment {
         listView = (ListView) viewRoot.findViewById(R.id.listComments);
         Button btnSendComment = (Button)viewRoot.findViewById(R.id.btnSendComment);
         textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
-        textViewNoResult.setText("Aucun commentaire disponible.");
+        textViewNoResult.setText("No comment available.");
 
 
 
@@ -152,6 +152,7 @@ public class CommentsFragment  extends Fragment {
 
                 loadComment.setVisibility(View.GONE);
                 listView.setVisibility(View.VISIBLE);
+                textViewNoResult.setVisibility(View.GONE);
 
                 comments = new ArrayList<Message>();
                 Collections.addAll(comments, commentaires);

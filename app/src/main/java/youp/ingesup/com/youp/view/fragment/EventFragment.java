@@ -58,7 +58,7 @@ public class EventFragment extends Fragment {
         listView = (ListView)viewRoot.findViewById(R.id.list);
 
         textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
-        textViewNoResult.setText("Aucun évènement disponible.");
+        textViewNoResult.setText("No event available.");
 
         ActionBar actionBar = getActivity().getActionBar();
 

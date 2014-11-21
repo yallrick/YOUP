@@ -52,7 +52,7 @@ public class MyAccountEventsFragment extends Fragment {
 
         listView = (ListView)root.findViewById(R.id.listEventProfile);
         textViewNoResult = (TextView) root.findViewById(R.id.tv_no_result);
-        textViewNoResult.setText("Aucun évènement disponible.");
+        textViewNoResult.setText("No event available.");
 
         RestAdapter serviceEventBuilder = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
         EventService serviceEvent = serviceEventBuilder.create(EventService.class);

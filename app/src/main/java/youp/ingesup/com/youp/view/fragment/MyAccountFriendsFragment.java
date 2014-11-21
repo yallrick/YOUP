@@ -53,7 +53,7 @@ public class MyAccountFriendsFragment extends Fragment {
 
         listView = (ListView)viewRoot.findViewById(R.id.listViewFriends);
         textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
-        textViewNoResult.setText("Vous n'avez aucun ami.");
+        textViewNoResult.setText("You have no friends. No one likes you :(");
 
         RestAdapter serviceUserBuilder = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
         serviceUser = serviceUserBuilder.create(UserService.class);

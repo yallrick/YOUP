@@ -29,8 +29,7 @@ import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Message;
 import youp.ingesup.com.youp.model.services.ForumService;
-import youp.ingesup.com.youp.view.EventActivity;
-import youp.ingesup.com.youp.view.LoginActivity;
+import youp.ingesup.com.youp.view.HomeActivity;
 import youp.ingesup.com.youp.view.adapter.CommentAdapter;
 
 /**
@@ -75,8 +74,7 @@ public class CommentsFragment  extends Fragment {
                 if(!Auth.isLoggedIn()){
                     Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
+                    ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false));
 
                     return;
                 }
@@ -95,7 +93,7 @@ public class CommentsFragment  extends Fragment {
                 serviceForum.sendMessage(String.valueOf(topicID), idUser, etComments.getText().toString(), dateNow, new Callback<Boolean>() {
                     @Override
                     public void success(Boolean aBoolean, Response response) {
-                        if(aBoolean)
+                        if (aBoolean)
                             loadComments();
                         else
                             Toast.makeText(getActivity(), "Comments are not allowed here. Sorry!", Toast.LENGTH_LONG).show();

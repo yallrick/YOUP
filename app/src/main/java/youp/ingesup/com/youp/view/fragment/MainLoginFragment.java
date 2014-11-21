@@ -54,11 +54,15 @@ public class MainLoginFragment extends Fragment implements
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+        viewPager.setCurrentItem(0);
+
         // Adding Tab
         actionBar.removeAllTabs();
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
         }
+
+        viewPager.setCurrentItem((getArguments().getBoolean(PARAM_GO_SIGN_UP)) ? 1 : 0);
 
         /**
          * on swiping the viewpager make respective tab selected
@@ -69,7 +73,7 @@ public class MainLoginFragment extends Fragment implements
             public void onPageSelected(int position) {
                 // on changing the page
                 // make respected tab selected
-                actionBar.setSelectedNavigationItem(position);
+                //actionBar.setSelectedNavigationItem(position);
             }
 
             @Override

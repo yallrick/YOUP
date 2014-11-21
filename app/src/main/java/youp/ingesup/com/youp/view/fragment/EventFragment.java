@@ -38,29 +38,12 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot = inflater.inflate( R.layout.fragment_event, container, false);
 
+        listView = (ListView)viewRoot.findViewById(R.id.list);
+
         // http://www.mocky.io/v2/546c52f8a112329207713535
         // http://youp-evenementapi.azurewebsites.net/
-        RestAdapter serviceEventBuilder = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
-        EventService serviceEvent = serviceEventBuilder.create(EventService.class);
-        serviceEvent.getEvents(new Callback<List<Evenement>>() {
-            @Override
-            public void success(List<Evenement> evenements, Response response) {
-                events = evenements;
 
-                EventAdapter adapter = new EventAdapter(getActivity(), R.layout.item_event, events);
-                listView.setAdapter(adapter);
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                Activity  context = getActivity();
-
-                if(context != null)
-                    Toast.makeText(context, "Impossible de charger les events. " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        listView = (ListView)viewRoot.findViewById(R.id.list);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -68,10 +51,6 @@ public class EventFragment extends Fragment {
 
                 try{
                     ((HomeActivity) getActivity()).goToFragment(MainEventFragment.newInstance(events.get(position).getEvenement_id()));
-                    Intent intent = new Intent(getActivity(), MainEventFragment.class);
-                    intent.putExtra(MainEventFragment.PARAM_ID_EVENT, events.get(position).getEvenement_id());
-                    //intent.putExtra(EventActivity.PARAM_ID_PROFILE, events.get(position).());
-                    startActivity(intent);
                 }catch(Exception ex)
                 {
                     Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
@@ -82,5 +61,32 @@ public class EventFragment extends Fragment {
         });
 
         return viewRoot;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RestAdapter serviceEventBuilder = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
+        EventService serviceEvent = serviceEventBuilder.create(EventService.class);
+        serviceEvent.getEvents(new Callback<List<Evenement>>() {
+            @Override
+            public void success(List<Evenement> evenements, Response response) {
+                events = evenements;
+
+                if(events != null) {
+                    EventAdapter adapter = new EventAdapter(getActivity(), R.layout.item_event, events);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Activity  context = getActivity();
+
+                if(context != null)
+                    Toast.makeText(context, "Impossible de charger les events. " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

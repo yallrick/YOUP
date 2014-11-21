@@ -125,6 +125,9 @@ public class DetailsFragment extends Fragment {
             @Override
             public void success(Evenement event, Response response) {
 
+                if(event == null)
+                    return;
+
                 evenement = event;
 
                 tvTitle.setText(evenement.getTitreEvenement());

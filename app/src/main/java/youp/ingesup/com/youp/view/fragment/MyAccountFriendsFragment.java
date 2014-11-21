@@ -36,7 +36,6 @@ import youp.ingesup.com.youp.model.bean.User;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.model.services.ForumService;
 import youp.ingesup.com.youp.model.services.UserService;
-import youp.ingesup.com.youp.view.EventActivity;
 import youp.ingesup.com.youp.view.MyAccountActivity;
 import youp.ingesup.com.youp.view.adapter.CommentAdapter;
 import youp.ingesup.com.youp.view.adapter.EventAdapter;

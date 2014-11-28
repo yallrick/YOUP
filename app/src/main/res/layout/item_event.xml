@@ -2,86 +2,120 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:layout_margin="8dp">
-
-    <RelativeLayout
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/item_event_background"
-    android:layout_margin="4dp"
-    android:padding="4dp">
-
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@color/Blue"
-        android:layout_margin="4dp"
-        />
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/img"
-        android:layout_alignTop="@id/img"
-        android:layout_alignBottom="@id/img"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/item_event_background"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@drawable/sample"
+            android:layout_margin="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_below="@id/img"
+                    android:textSize="20sp"
+                    android:textColor="@color/DarkBlue"
+                    android:textStyle="bold"
+                    android:text="Title maybe super long" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="12/11/2014"/>
 
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="12/11/2014"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/category"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textStyle="italic"
+                                android:text="Category" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textStyle="italic"
+                                android:text=" à " />
+
+                            <TextView
+                                android:id="@+id/location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:textSize="16sp"
+                                android:text="Location" />
 
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:singleLine="true"
-        android:textSize="16sp"
-        android:text="Location" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom|right"
+                        android:layout_weight="4"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="1337 €" />
+                </LinearLayout>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textStyle="italic"
-        android:text="Category" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="8"
+                android:src="@drawable/arrow"
+                android:layout_margin="4dp" />
 
-
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="1337 €" />
-
-
+        </LinearLayout>
     </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:layout_below="@id/img"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:text="Title maybe super long" />
-
-</RelativeLayout>
-
 </LinearLayout>

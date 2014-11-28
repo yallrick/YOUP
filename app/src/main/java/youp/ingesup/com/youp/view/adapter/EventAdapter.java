@@ -60,12 +60,17 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
 
 
         // image
-        String imageURL = currentItem.getOrganisateurImageUrl();
+        /*
+        String imageURL = currentItem.getImageUrl();
         if( imageURL != null && !imageURL.isEmpty()) {
             ImageLoader imageLoader = ImageLoader.getInstance();
             imageLoader.displayImage(imageURL, imageView);
         }
-
+        else
+        {
+            imageView.setVisibility(View.GONE);
+        }
+*/
         // date
         DateTime dateTime = new DateTime(currentItem.getDateEvenement());
         date.setText(dateTime.getDateInFrench());
@@ -77,7 +82,7 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
         title.setText(currentItem.getTitreEvenement());
 
         // lieu (pays)
-        locationView.setText(currentItem.getAdresse().getPays());
+        locationView.setText(currentItem.getAdresse().getVille());
 
         // category
         categoryView.setText(currentItem.getCategorie_Libelle());

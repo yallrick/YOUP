@@ -29,6 +29,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
 }
 
+
 // Adding R2M dependencies and public repo
 // Go to https://github.com/magnetsystems/r2m-plugin-android for more info
 /**

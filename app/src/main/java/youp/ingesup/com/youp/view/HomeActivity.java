@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +28,7 @@ import youp.ingesup.com.youp.view.fragment.CommentsFragment;
 import youp.ingesup.com.youp.view.fragment.EventFragment;
 import youp.ingesup.com.youp.view.fragment.SignUpFragment;
 
-public class HomeActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, SignUpFragment.OnFragmentInteractionListener {
+public class HomeActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, SignUpFragment.OnFragmentInteractionListener, SwipeRefreshLayout.OnRefreshListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -40,6 +42,7 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
 
     private FrameLayout container;
     private android.support.v4.app.Fragment currentFragment;
+    public SwipeRefreshLayout mPullToRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,16 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
         setContentView(R.layout.activity_home);
 
         Log.e("HomeActivity", "onCreate()");
+
+
+        mPullToRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ptr_layout);
+        mPullToRefreshLayout.setOnRefreshListener(this);
+        mPullToRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -61,19 +74,15 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
 
     }
 
-    private static long back_pressed;
+    @Override
+    public void onRefresh() {
+        tryToUpdateTimeline();
+    }
 
     @Override
     public void onBackPressed()
     {
-
-        // TODO fragment go back in stack
         super.onBackPressed();
-
-
-        //if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed();
-        //else Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
-        back_pressed = System.currentTimeMillis();
     }
 
 
@@ -101,20 +110,10 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
 
             currentFragment = PlaceholderFragment.newInstance(position + 1);
 
+
             String tag = String.valueOf(position);
 
             goToFragment(currentFragment, tag);
-
-            /*
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, currentFragment, tag)
-                    .addToBackStack(tag)
-                    .commit();
-
-            /**/
-
-
 
         }
         else Log.e("onNavigationDrawerItemSelected", "container is null !!");
@@ -125,6 +124,9 @@ public class HomeActivity extends FragmentActivity implements NavigationDrawerFr
     public void goToFragment(final Fragment fragment, String tag){
 
         currentFragment = fragment;
+
+
+        mPullToRefreshLayout.setEnabled(currentFragment instanceof EventFragment);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()

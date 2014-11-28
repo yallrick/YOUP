@@ -3,9 +3,7 @@ package youp.ingesup.com.youp.view.fragment;
 import android.app.ActionBar;
 import android.app.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,16 +35,13 @@ public class EventFragment extends Fragment {
 
     private List<Evenement> events;
     private ListView listView;
-    private ProgressBar loadEvent;
     private ProgressBar bottomView;
     private String maxId;
     private EventAdapter adapter;
     private int mLastItem;
 
-
     private TextView textViewNoResult;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot = inflater.inflate( R.layout.fragment_event, container, false);
@@ -54,8 +49,8 @@ public class EventFragment extends Fragment {
         // http://www.mocky.io/v2/546c52f8a112329207713535
         // http://youp-evenementapi.azurewebsites.net/
 
-        loadEvent = (ProgressBar)viewRoot.findViewById(R.id.loadEvent);
         listView = (ListView)viewRoot.findViewById(R.id.list);
+
 
         textViewNoResult = (TextView) viewRoot.findViewById(R.id.tv_no_result);
         textViewNoResult.setText("No event available.");
@@ -77,6 +72,8 @@ public class EventFragment extends Fragment {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
+                ((HomeActivity)getActivity()).mPullToRefreshLayout.setEnabled(firstVisibleItem == 0);
+
                 if(visibleItemCount == 0 || totalItemCount == 0)
                     return;
 
@@ -85,7 +82,6 @@ public class EventFragment extends Fragment {
                 boolean footerIsLoadingFooter = (view.getChildAt(view.getChildCount() - listView.getFooterViewsCount()) == bottomView);
 
                 if(lastItem == totalItemCount && footerIsLoadingFooter && lastItem != mLastItem) {
-
                     loadEvents(maxId);
                 }
 
@@ -124,8 +120,6 @@ public class EventFragment extends Fragment {
         if(maxIdParam == null || maxIdParam.isEmpty()) {
 
 
-            loadEvent.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
 
             //////////////////////////////////////////////
             ////////////// REFRESH LOADING ///////////////
@@ -135,17 +129,19 @@ public class EventFragment extends Fragment {
             serviceEvent.getEvents(new Callback<List<Evenement>>() {
                 @Override
                 public void success(List<Evenement> evenements, Response response) {
+
+
+                    ((HomeActivity)getActivity()).mPullToRefreshLayout.setRefreshing(false);
+
                     if(evenements == null || evenements.size() ==0){
 
                         textViewNoResult.setVisibility(View.VISIBLE);
-                        loadEvent.setVisibility(View.GONE);
                         listView.setVisibility(View.GONE);
                         return;
-
+                    }else {
+                        textViewNoResult.setVisibility(View.GONE);
+                        listView.setVisibility(View.VISIBLE);
                     }
-
-                    loadEvent.setVisibility(View.GONE);
-                    listView.setVisibility(View.VISIBLE);
 
                     events = evenements;
 
@@ -163,8 +159,7 @@ public class EventFragment extends Fragment {
                     Activity context = getActivity();
 
                     if (context != null) {
-                        loadEvent.setVisibility(View.GONE);
-                        listView.setVisibility(View.VISIBLE);
+                        ((HomeActivity)getActivity()).mPullToRefreshLayout.setRefreshing(false);
                         Toast.makeText(context, "Fail to refresh. " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -179,9 +174,6 @@ public class EventFragment extends Fragment {
             serviceEvent.getNextEvents(maxIdParam, new Callback<List<Evenement>>() {
                 @Override
                 public void success(List<Evenement> evenements, Response response) {
-
-                    loadEvent.setVisibility(View.GONE);
-                    listView.setVisibility(View.VISIBLE);
 
                     if(evenements != null && evenements.size() > 0) {
                         events.addAll(evenements);
@@ -199,8 +191,6 @@ public class EventFragment extends Fragment {
                     Activity context = getActivity();
 
                     if (context != null) {
-                        loadEvent.setVisibility(View.GONE);
-                        listView.setVisibility(View.VISIBLE);
                         Toast.makeText(context, "Fail to load next events. " + error.getResponse().getStatus(), Toast.LENGTH_LONG).show();
                     }
 

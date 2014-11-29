@@ -38,7 +38,6 @@ public class LoginFragment extends Fragment{
     private SignUpFragment.OnFragmentInteractionListener mListener;
 
     private Button btLogin;
-    private Button btLostPassword;
 
     private EditText etUsername;
     private EditText etPassword;
@@ -56,7 +55,6 @@ public class LoginFragment extends Fragment{
 
         /* Récupération des éléments de la vue */
         btLogin = (Button)root.findViewById(R.id.bt_Login);
-        btLostPassword = (Button) root.findViewById(R.id.btLostPassword);
         etPassword = (EditText) root.findViewById(R.id.etPassword);
         etUsername = (EditText) root.findViewById(R.id.etUsername);
 
@@ -65,13 +63,6 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Login();
-            }
-        });
-        btLostPassword.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                LostPassword();
             }
         });
 

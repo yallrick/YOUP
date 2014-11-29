@@ -41,6 +41,7 @@ public class DetailsFragment extends Fragment {
     private TextView tvLocation;
     private TextView tvCategorie;
     private ImageView img;
+    private ImageView imgCategorie;
 
     private Button btOrganizer;
 
@@ -66,6 +67,7 @@ public class DetailsFragment extends Fragment {
         tvLocation = (TextView) root.findViewById(R.id.tvLocationDetails);
         tvCategorie = (TextView) root.findViewById(R.id.tvCategoryDetails);
         img = (ImageView) root.findViewById(R.id.imgDetails);
+        imgCategorie = (ImageView) root.findViewById(R.id.imgCategorie);
         btOrganizer = (Button) root.findViewById(R.id.btOrganizerDetails);
         Button btSubscribe = (Button) root.findViewById(R.id.btSubscribeDetails);
         Button btShare = (Button) root.findViewById(R.id.btShareDetails);
@@ -145,18 +147,17 @@ public class DetailsFragment extends Fragment {
                 else
                     tvLocation.setText("-");
 
-                if(evenement.getCategorie_Libelle() != null && !evenement.getCategorie_Libelle().isEmpty())
-                    tvCategorie.setText(evenement.getCategorie_Libelle());
-                else
-                    tvCategorie.setText("-");
+                ChargerCategorie();
+
 
                 if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
                     ImageLoader imageLoader = ImageLoader.getInstance();
                     imageLoader.displayImage(evenement.getImageUrl(), img);
                 }else{
-                    if(evenement.getOrganisateurImageUrl() != null && !evenement.getOrganisateurImageUrl().isEmpty()) {
+
+                    if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
                         ImageLoader imageLoader = ImageLoader.getInstance();
-                        imageLoader.displayImage(evenement.getOrganisateurImageUrl(), img);
+                        imageLoader.displayImage(evenement.getImageUrl(), img);
                     }
                 }
 
@@ -249,6 +250,28 @@ public class DetailsFragment extends Fragment {
         {
             Log.e("EventFragment - Envoi de l'ID vers EventActivity", ex.getMessage());
         }
+
+    }
+
+    private void ChargerCategorie()
+    {
+        String categorie = evenement.getCategorie_Libelle();
+
+        if(categorie != null && !categorie.isEmpty())
+            tvCategorie.setText(categorie);
+        else
+            tvCategorie.setText("-");
+
+        if(categorie.equals("Sport"))
+            imgCategorie.setImageResource(R.drawable.sport);
+        else if (categorie.equals("Musée"))
+            imgCategorie.setImageResource(R.drawable.museum);
+        else if (categorie.equals("Marche a pied"))
+            imgCategorie.setImageResource(R.drawable.walking);
+        else if (categorie.equals("Apéro entre ami"))
+            imgCategorie.setImageResource(R.drawable.aperitif);
+        else if (categorie.equals("Anniversaire"))
+            imgCategorie.setImageResource(R.drawable.birsthday);
 
     }
 

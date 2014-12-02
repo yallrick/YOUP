@@ -15,6 +15,7 @@ import retrofit.http.Query;
 import youp.ingesup.com.youp.model.bean.Categorie;
 import youp.ingesup.com.youp.model.bean.Evenement;
 import youp.ingesup.com.youp.model.bean.Location;
+import youp.ingesup.com.youp.model.bean.Participation;
 
 /**
  * Created by Vincent del Valle on 31/10/2014.
@@ -86,7 +87,7 @@ public interface EventService {
     @POST("/api/Evenement/{id_evenement}/Inscription")
     void joinEvent(@Path("id_evenement") String idEvent,
                    @Query("token") String token,
-                   Callback<Boolean> callback);
+                   Callback<Participation> callback);
 
     @DELETE("/api/Evenement/{id}?id_profil={id_profil}")
     void destroyEvent(@Path("id") String id,

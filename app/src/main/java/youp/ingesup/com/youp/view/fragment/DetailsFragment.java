@@ -25,6 +25,7 @@ import youp.ingesup.com.youp.R;
 import youp.ingesup.com.youp.model.Auth;
 import youp.ingesup.com.youp.model.bean.DateTime;
 import youp.ingesup.com.youp.model.bean.Evenement;
+import youp.ingesup.com.youp.model.bean.Participation;
 import youp.ingesup.com.youp.model.services.EventService;
 import youp.ingesup.com.youp.view.HomeActivity;
 
@@ -200,13 +201,13 @@ public class DetailsFragment extends Fragment {
         if(Auth.isLoggedIn()) {
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
             EventService service = restAdapter.create(EventService.class);
-            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getToken().toUpperCase(), new Callback<Boolean>() {
+            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getToken().toUpperCase(), new Callback<Participation>() {
                 @Override
-                public void success(Boolean aBoolean, Response response) {
+                public void success(Participation aBoolean, Response response) {
                     if(getActivity() == null)
                         return;
 
-                    if(aBoolean){
+                    if(aBoolean != null){
                         Toast.makeText(getActivity(), "Registration confirmed.", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(getActivity(), "Registration failed.", Toast.LENGTH_SHORT).show();

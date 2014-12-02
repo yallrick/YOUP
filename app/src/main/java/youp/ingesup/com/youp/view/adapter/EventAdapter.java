@@ -60,7 +60,6 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
 
 
         // image
-        /*
         String imageURL = currentItem.getImageUrl();
         if( imageURL != null && !imageURL.isEmpty()) {
             ImageLoader imageLoader = ImageLoader.getInstance();
@@ -70,7 +69,6 @@ public class EventAdapter extends ArrayAdapter<Evenement> {
         {
             imageView.setVisibility(View.GONE);
         }
-*/
         // date
         DateTime dateTime = new DateTime(currentItem.getDateEvenement());
         date.setText(dateTime.getDateInFrench());

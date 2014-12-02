@@ -45,6 +45,7 @@ public class Auth {
      * Retourne vrai si l'utilisateur en cours est authentifié.
      */
     public static boolean isLoggedIn(){
+
         return instance != null;
     }
 

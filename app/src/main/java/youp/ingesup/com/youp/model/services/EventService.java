@@ -68,10 +68,8 @@ public interface EventService {
     @GET("/api/Evenement")
     void getNextEvents( @Query("max_id") String maxId , Callback<List<Evenement>> callback);
 
-
-    @GET("/api/Evenement")
-    void getEvents(@Query("id_profil") String idProfile,
-                     Callback<List<Evenement>> callback);
+    @GET("/api/Profil/{id}/Evenements")
+    void getEvents(@Path("id") String idProfile, Callback<List<Evenement>> callback);
 
 
     @GET("/api/Evenement/{id}")
@@ -85,9 +83,9 @@ public interface EventService {
                   @Path("description") String description);
 
 
-    @POST("/api/Evenement?idEvenement={idEvenement}&idProfil={idProfil}")
-    void joinEvent(@Path("idEvenement") String idEvent,
-                   @Path("idProfil") String idProfile,
+    @POST("/api/Evenement/{id_evenement}/Inscription")
+    void joinEvent(@Path("id_evenement") String idEvent,
+                   @Query("token") String token,
                    Callback<Boolean> callback);
 
     @DELETE("/api/Evenement/{id}?id_profil={id_profil}")

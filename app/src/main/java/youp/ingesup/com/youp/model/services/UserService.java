@@ -18,10 +18,10 @@ public interface UserService {
     @GET("/api/User/{id}")
     void getUser(@Path("id") String id, Callback<User> callback);
 
+
     @POST("/api/Auth")
     void login(@Query("Email") String username,
                @Query("Pass") String password,
-               @Query("Device") String device,
                Callback<User> callback);
 
     @FormUrlEncoded

@@ -29,11 +29,11 @@ public class MyAccountAdapter extends FragmentStatePagerAdapter {
 
         switch (i){
             case 0:
-                return myAccountFriendsFragment;
+                return myAccountProfileFragment;
             case 1:
                 return myAccountEventsFragment;
             case 2:
-                return myAccountProfileFragment;
+                return myAccountFriendsFragment;
         }
 
         return null;

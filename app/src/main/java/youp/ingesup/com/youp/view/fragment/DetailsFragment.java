@@ -155,10 +155,7 @@ public class DetailsFragment extends Fragment {
                     imageLoader.displayImage(evenement.getImageUrl(), img);
                 }else{
 
-                    if(evenement.getImageUrl() != null && !evenement.getImageUrl().isEmpty()) {
-                        ImageLoader imageLoader = ImageLoader.getInstance();
-                        imageLoader.displayImage(evenement.getImageUrl(), img);
-                    }
+                    img.setVisibility(View.GONE);
                 }
 
 
@@ -200,18 +197,10 @@ public class DetailsFragment extends Fragment {
     private void Subscription()
     {
 
-        if(!Auth.isLoggedIn()){
-            Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if(this.evenement == null || this.evenement.getEvenement_id() == null || Auth.getInstance() == null || Auth.getInstance().getUser() == null || Auth.getInstance().getUser().getId() == null)
-            return;
-
         if(Auth.isLoggedIn()) {
-            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://youp-evenementapi.azurewebsites.net/").build();
             EventService service = restAdapter.create(EventService.class);
-            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getUser().getId().toString(), new Callback<Boolean>() {
+            service.joinEvent(this.evenement.getEvenement_id().toString(), Auth.getInstance().getToken().toUpperCase(), new Callback<Boolean>() {
                 @Override
                 public void success(Boolean aBoolean, Response response) {
                     if(getActivity() == null)
@@ -231,6 +220,9 @@ public class DetailsFragment extends Fragment {
             });
         }else{
             Toast.makeText(getActivity(), "You have to be logged in.", Toast.LENGTH_LONG).show();
+            ((HomeActivity) getActivity()).goToFragment(MainLoginFragment.newInstance(false), "login");
+
+            return;
         }
     }
 

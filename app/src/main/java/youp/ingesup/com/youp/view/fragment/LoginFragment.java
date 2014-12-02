@@ -96,12 +96,16 @@ public class LoginFragment extends Fragment{
 
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://aspmoduleprofil.azurewebsites.net/").build();
             UserService service = restAdapter.create(UserService.class);
-            service.login(username, password, "Android", new Callback<User>() {
+            service.login(username.toLowerCase(), password, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
 
                     if(user == null)
+                    {
+                        Toast.makeText(getActivity(), "Authentification data invalid.", Toast.LENGTH_LONG).show();
+
                         return;
+                    }
 
                     Auth auth = Auth.getInstance(user, user.getToken());
                     Toast.makeText(getActivity(), "Vous êtes maintenant connecté.", Toast.LENGTH_LONG).show();

@@ -30,7 +30,7 @@ public class MainAccountFragment extends Fragment implements
     private ActionBar actionBar;
 
     // Tab titles
-    private String[] tabs = { "Friends", "Events", "Profile"};
+    private String[] tabs = {"Profile" , "Events", "Friends"};
 
     public static MainAccountFragment newInstance(int profileId){
         MainAccountFragment fragment = new MainAccountFragment();

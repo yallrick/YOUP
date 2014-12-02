@@ -204,7 +204,7 @@ public class SignUpFragment extends Fragment{
             service.createUser(username, password, firstName, lastName, gender, mail, birthday, city, zipcode, new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
-                    service.login(username, password, "Android", new Callback<User>() {
+                    service.login(username, password, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
                             Auth auth = Auth.getInstance(user, user.getToken());

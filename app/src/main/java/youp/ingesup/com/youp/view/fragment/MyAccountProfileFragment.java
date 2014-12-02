@@ -118,8 +118,9 @@ public class MyAccountProfileFragment extends Fragment {
         tvVille.setText(user.getVille());
         tvMetier.setText(user.getMetier());
 
-        dateTime = new DateTime(user.getDateInscription());
-        tvDateInscription.setText(dateTime.getDay() + "/" + dateTime.getMonth() + "/" + dateTime.getYear());
+        String dateInsc = user.getDateInscription().substring(0,user.getDateInscription().length() - 4);
+        DateTime dt = new DateTime(dateInsc);
+        tvDateInscription.setText(dt.getDay() + "/" + dt.getMonth() + "/" + dt.getYear());
 
         tvMail.setText(user.getAdresseMail());
         tvDescription.setText(user.getPresentation());
